@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animator;
+    private TouchingDirection touchingDirection;
 
     public float walkSpeed;
     public float runSpeed;
+    public float airWalkSpeed;
     public float jumpForce;
     private float horizontal;
 
@@ -16,47 +19,70 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        touchingDirection = GetComponent<TouchingDirection>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        IsMoving = horizontal != 0; 
-        IsRunning = Input.GetKey(KeyCode.LeftShift);  
+        HandleMovement();
     }
 
     void FixedUpdate()
     {
-        HandleMovement();
+        
         FlipDirection();
+
     }
 
     private void HandleMovement()
     {
+        IsMoving = horizontal != 0;
+        IsRunning = Input.GetKey(KeyCode.LeftShift) && touchingDirection.IsOnGround 
+        && IsMoving;
+
+        //di chuyển 
         horizontal = Input.GetAxisRaw("Horizontal");
-        if(IsMoving){
+        if (IsMoving)
+        {
             rb.velocity = new Vector2(horizontal * CurrentSpeed, rb.velocity.y);
         }
-        animator.SetBool("IsMoving", IsMoving);
-        animator.SetBool("IsRunning", IsRunning);
 
         // Nhảy
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space) && touchingDirection.IsOnGround)
         {
             animator.SetTrigger(AnimationStrings.jump);
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce) ; 
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+        animator.SetFloat(AnimationStrings.velocityY, rb.velocity.y);
 
+        //Tấn công
+        if(Input.GetMouseButtonDown(0)){
+            animator.SetTrigger(AnimationStrings.attack);
+        }
     }
+
 
     private float CurrentSpeed
     {
-        get{
-            if(IsMoving){
-                if(IsRunning){
-                    return runSpeed;
-                }else{
-                    return walkSpeed;
+        get
+        {
+            if (IsMoving && !touchingDirection.IsOnWall)
+            {
+                if (touchingDirection.IsOnGround)
+                {
+                    if (IsRunning)
+                    {
+                        return runSpeed;
+                    }
+                    else
+                    {
+                        return walkSpeed;
+                    }
+                }
+                else
+                {
+                    return airWalkSpeed;
                 }
             }
             return 0;
