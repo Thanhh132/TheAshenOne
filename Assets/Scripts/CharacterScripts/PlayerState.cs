@@ -40,7 +40,7 @@ public class PlayerState
     //Gọi theo mỗi frameframe
     public virtual void LogicUpdate()
     {
-
+        
     }
     
     //đc gọi theo fixeupdate 

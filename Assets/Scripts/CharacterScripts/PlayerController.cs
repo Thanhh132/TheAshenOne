@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
+    public PlayerJumpState JumpState {get; private set;}
+    public PlayerInAirState AirState {get; private set;}
+    public PlayerLandState LandState {get; private set;}
 
     [SerializeField]
     private PlayerData playerData;
@@ -23,7 +26,8 @@ public class PlayerController : MonoBehaviour
     public int FacingDirection { get; private set; }
 
 
-
+    [SerializeField]
+    private Transform groundCheck;
     public Vector2 workspace;
 
     private void Awake()
@@ -36,6 +40,9 @@ public class PlayerController : MonoBehaviour
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, AnimStrings.playerIdle);
         MoveState = new PlayerMoveState(this, StateMachine, playerData, AnimStrings.playerWalk);
+        JumpState = new PlayerJumpState(this, StateMachine, playerData, AnimStrings.playerJump);
+        AirState = new PlayerInAirState(this, StateMachine, playerData, AnimStrings.playerInAir);
+        LandState = new PlayerLandState(this, StateMachine, playerData, AnimStrings.playerLand);
     }
 
     private void Start()
@@ -62,12 +69,24 @@ public class PlayerController : MonoBehaviour
         CurrentVelocity = workspace;
     }
 
+    public void SetVelocityY(float velocity)
+    {
+        workspace.Set(CurrentVelocity.x, velocity);
+        RB.velocity = workspace;
+        CurrentVelocity = workspace;
+    }
+
     public void FlipCheck(float input)
     {
         if (input != 0 && input != FacingDirection)
         {
             Flip();
         }
+    }
+
+    public bool IfGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.isGrounded);
     }
 
     private void Flip()
