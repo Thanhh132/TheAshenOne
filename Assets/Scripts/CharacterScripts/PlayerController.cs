@@ -94,4 +94,10 @@ public class PlayerController : MonoBehaviour
         FacingDirection *= -1;
         transform.Rotate(0, 180, 0);
     }
+
+    public void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
+
+    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+
+
 }

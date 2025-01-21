@@ -7,13 +7,6 @@ public class PlayerInputHandle : MonoBehaviour
 {
     public float MovementInput {get; private set;}
     public bool JumpInput {get; private set;}
-
-    void Start()
-    {
-        
-    }
-
-
     void Update()
     {
         MovementInput = Input.GetAxisRaw("Horizontal");
@@ -21,4 +14,5 @@ public class PlayerInputHandle : MonoBehaviour
     }
 
     public void UseJumpInput() => JumpInput = false;
+    
 }

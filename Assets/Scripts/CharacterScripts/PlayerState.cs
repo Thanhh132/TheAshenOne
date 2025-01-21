@@ -11,6 +11,7 @@ public class PlayerState
 
     //thời gian bắt đầy state 
     protected float startTime;
+    protected bool isAnimationFinished;
 
     private string animBoolName;
 
@@ -29,6 +30,7 @@ public class PlayerState
         player.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
         Debug.Log(animBoolName);
+        isAnimationFinished = false;
     }
 
     // dc gọi khi rời khỏi state
@@ -54,4 +56,8 @@ public class PlayerState
     {
 
     }
+
+    public virtual void AnimationTrigger() { }
+
+    public virtual void AnimationFinishTrigger() => isAnimationFinished = true;
 }
