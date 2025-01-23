@@ -11,7 +11,15 @@ public class PlayerData : ScriptableObject
     [Header("Jump State")]
     public float jumpVelocity = 5f;
 
+    [Header("Climb State")]
+    public float climbVelocity = 3f;
+
+    [Header("Wall Slide State")]
+    public float wallSlideVelocity = 3f;
+
     [Header("Check Variables")]
     public float groundCheckRadius = 0.3f;
+    public float climbableCheckDistance = 0.5f;
     public LayerMask isGrounded;
+    public LayerMask isClimbable;
 }

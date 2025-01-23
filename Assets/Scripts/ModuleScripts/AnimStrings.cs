@@ -5,4 +5,7 @@ internal class AnimStrings
     internal static string playerJump = "Player_Jump";
     internal static string playerInAir = "Player_InAir";
     internal static string playerLand = "Player_Land";
+    internal static string playerClimb = "Player_Climb";
+    internal static string playerGrab = "Player_Grab";
+    internal static string playerWallSlide = "Player_WallSlide";
 }

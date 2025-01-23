@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   movementVelocity: 8
-  jumpVelocity: 15
+  jumpVelocity: 30
+  climbVelocity: 3
+  wallSlideVelocity: 3
   groundCheckRadius: 0.3
+  climbableCheckDistance: 0.5
   isGrounded:
     serializedVersion: 2
     m_Bits: 8
+  isClimbable:
+    serializedVersion: 2
+    m_Bits: 128

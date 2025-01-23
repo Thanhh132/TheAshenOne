@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
-    private float moveInput;
+    private float xInput;
+    private bool jumpInput;
     private bool isGrounded;
+    private bool isClimbable;
+    private bool grabInput;
+
     public PlayerInAirState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
-    
+
     public override void DoCheck()
     {
         base.DoCheck();
         isGrounded = player.IfGrounded();
+        isClimbable = player.IfClimbable();
     }
 
     public override void Enter()
@@ -30,16 +35,26 @@ public class PlayerInAirState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        moveInput = player.InputHandle.MovementInput;
-        if(isGrounded && player.CurrentVelocity.y < 0.01f){
+
+        xInput = player.InputHandle.XInput;
+        jumpInput = player.InputHandle.JumpInput;
+        grabInput = player.InputHandle.GrabInput;
+
+        if (isGrounded && player.CurrentVelocity.y < 0.01f)
+        {
             stateMachine.ChangeState(player.LandState);
-        }else{
-            player.FlipCheck(moveInput);
-            player.SetVelocityX(playerData.movementVelocity * moveInput);
-
+        }else if (jumpInput)
+        {
+            player.FlipCheck(xInput);
+            player.SetVelocityX(playerData.movementVelocity * xInput);
             player.Anim.SetFloat("YVelocity", player.CurrentVelocity.y);
+        }else if (isClimbable && grabInput)
+        {
+            stateMachine.ChangeState(player.GrabState);
+        }else if (isClimbable && xInput == player.FacingDirection && player.CurrentVelocity.y <= 0.01f)
+        {
+            stateMachine.ChangeState(player.WallSlideState);
         }
-
     }
 
     public override void PhysicsUpdate()

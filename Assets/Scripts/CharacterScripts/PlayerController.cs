@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public PlayerJumpState JumpState {get; private set;}
     public PlayerInAirState AirState {get; private set;}
     public PlayerLandState LandState {get; private set;}
+    public PlayerClimbState ClimbState {get; private set;}
+    public PlayerGrabState GrabState {get; private set;}
+    public PlayerWallSlideState WallSlideState {get; private set;}
 
     [SerializeField]
     private PlayerData playerData;
@@ -27,7 +30,9 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField]
-    private Transform groundCheck;
+    private Transform groundCheck; 
+    [SerializeField]
+    private Transform climbableCheck;
     public Vector2 workspace;
 
     private void Awake()
@@ -43,6 +48,9 @@ public class PlayerController : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, playerData, AnimStrings.playerJump);
         AirState = new PlayerInAirState(this, StateMachine, playerData, AnimStrings.playerInAir);
         LandState = new PlayerLandState(this, StateMachine, playerData, AnimStrings.playerLand);
+        ClimbState = new PlayerClimbState(this, StateMachine, playerData, AnimStrings.playerClimb);
+        GrabState = new PlayerGrabState(this, StateMachine, playerData, AnimStrings.playerGrab);
+        WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, AnimStrings.playerWallSlide);
     }
 
     private void Start()
@@ -50,6 +58,7 @@ public class PlayerController : MonoBehaviour
         StateMachine.Initialize(IdleState);
         FacingDirection = 1;
     }
+
 
     private void Update()
     {
@@ -87,6 +96,11 @@ public class PlayerController : MonoBehaviour
     public bool IfGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.isGrounded);
+    }
+
+    public bool IfClimbable()
+    {
+        return Physics2D.OverlapCircle(climbableCheck.position, playerData.climbableCheckDistance, playerData.isClimbable);
     }
 
     private void Flip()
