@@ -40,6 +40,13 @@ public class PlayerGroundedState : PlayerState
         jumpInput = player.InputHandle.JumpInput;
         grabInput = player.InputHandle.GrabInput;
 
+        if(player.InputHandle.AttackInputs[(int)CombatInputs.primary])
+        {
+            stateMachine.ChangeState(player.PrimaryAttackState);
+        }else if(player.InputHandle.AttackInputs[(int)CombatInputs.secondary]){
+            stateMachine.ChangeState(player.SecondaryAttackState);
+        }
+
         if (jumpInput == true && isGrounded)
         {
             player.InputHandle.UseJumpInput();

@@ -47,11 +47,11 @@ TagManager:
   - name: Decoration
     uniqueID: 3376612011
     locked: 0
-  - name: ClimbableObject
-    uniqueID: 2816298929
-    locked: 0
   - name: Ground
     uniqueID: 3763448305
+    locked: 0
+  - name: ClimbableObject
+    uniqueID: 2816298929
     locked: 0
   - name: Player
     uniqueID: 851566309

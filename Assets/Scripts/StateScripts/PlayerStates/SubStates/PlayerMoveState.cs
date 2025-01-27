@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState
 {
+    private bool slideInput;
+    private bool rollInput;
+    private bool isGrounded;
+    private bool isTouchingWall;
+
     public PlayerMoveState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
-    
+
     public override void DoCheck()
     {
         base.DoCheck();
+        isGrounded = player.IfGrounded();
+        isTouchingWall = player.IfTouchingWall();
     }
 
     public override void Enter()
@@ -27,14 +34,23 @@ public class PlayerMoveState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         player.FlipCheck(moveInput);
+        slideInput = player.InputHandle.SlideInput;
+        rollInput = player.InputHandle.RollInput;
+
         player.SetVelocityX(playerData.movementVelocity * moveInput);
-        if(moveInput == 0){
+        if (moveInput == 0)
+        {
             stateMachine.ChangeState(player.IdleState);
         }
+        else if (moveInput != 0 && slideInput)
+        {
+            stateMachine.ChangeState(player.SlideState);
+        }else if (moveInput != 0 && rollInput)
+        {
+            stateMachine.ChangeState(player.RollState);
+        }
     }
-
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();

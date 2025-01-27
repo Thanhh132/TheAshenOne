@@ -8,6 +8,9 @@ public class PlayerData : ScriptableObject
     [Header("Move State")]
     public float movementVelocity = 5f;
 
+    [Header("Slide State")]
+    public float slideVelocity = 7f;
+
     [Header("Jump State")]
     public float jumpVelocity = 5f;
 
@@ -17,9 +20,13 @@ public class PlayerData : ScriptableObject
     [Header("Wall Slide State")]
     public float wallSlideVelocity = 3f;
 
+    [Header("Roll State")]
+    public float rollVelocity = 10f;
+
     [Header("Check Variables")]
     public float groundCheckRadius = 0.3f;
     public float climbableCheckDistance = 0.5f;
+    public float wallCheckDistance = 0.5f;
     public LayerMask isGrounded;
     public LayerMask isClimbable;
 }

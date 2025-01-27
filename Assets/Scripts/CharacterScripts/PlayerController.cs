@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 public class PlayerController : MonoBehaviour
 {
     #region State Variables
@@ -14,6 +15,10 @@ public class PlayerController : MonoBehaviour
     public PlayerClimbState ClimbState {get; private set;}
     public PlayerGrabState GrabState {get; private set;}
     public PlayerWallSlideState WallSlideState {get; private set;}
+    public PlayerSlideState SlideState {get; private set;}
+    public PlayerRollState RollState {get; private set;}
+    public PlayerAttackState PrimaryAttackState {get; private set;}
+    public PlayerAttackState SecondaryAttackState {get; private set;}
 
     [SerializeField]
     private PlayerData playerData;
@@ -51,12 +56,19 @@ public class PlayerController : MonoBehaviour
         ClimbState = new PlayerClimbState(this, StateMachine, playerData, AnimStrings.playerClimb);
         GrabState = new PlayerGrabState(this, StateMachine, playerData, AnimStrings.playerGrab);
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, AnimStrings.playerWallSlide);
+        SlideState = new PlayerSlideState(this, StateMachine, playerData, AnimStrings.playerSlide);
+        RollState = new PlayerRollState(this, StateMachine, playerData, AnimStrings.playerRoll);
+        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, AnimStrings.playerPrimaryAttack);
+        SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, AnimStrings.playerSecondaryAttack);
+        
     }
 
     private void Start()
     {
         StateMachine.Initialize(IdleState);
         FacingDirection = 1;
+        int count = Enum.GetValues(typeof(CombatInputs)).Length;
+        InputHandle.AttackInputs = new bool[count];
     }
 
 
@@ -103,6 +115,11 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(climbableCheck.position, playerData.climbableCheckDistance, playerData.isClimbable);
     }
 
+    public bool IfTouchingWall()
+    {
+        return Physics2D.Raycast(climbableCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.isGrounded);
+    }
+
     private void Flip()
     {
         FacingDirection *= -1;
@@ -112,6 +129,5 @@ public class PlayerController : MonoBehaviour
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
-
 
 }

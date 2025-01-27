@@ -12,7 +12,6 @@ public class PlayerState
     //thời gian bắt đầy state 
     protected float startTime;
     protected bool isAnimationFinished;
-
     private string animBoolName;
 
     public PlayerState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
