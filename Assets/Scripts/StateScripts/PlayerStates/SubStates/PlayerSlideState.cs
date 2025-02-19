@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSlideState : PlayerAbilityState
+public class PlayerSlideState : PlayerGroundedState
 {
     private bool dashInput;
-    private float xInput;
     protected bool isTouchingWall;
     public PlayerSlideState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {

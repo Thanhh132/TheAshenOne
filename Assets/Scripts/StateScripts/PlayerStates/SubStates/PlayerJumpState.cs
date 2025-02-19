@@ -8,11 +8,41 @@ public class PlayerJumpState : PlayerAbilityState
     {
     }
 
+    public override void DoCheck()
+    {
+        base.DoCheck();
+    }
+
     public override void Enter()
     {
         base.Enter();
         player.SetVelocityY(playerData.jumpVelocity);
         isAbilityDone = true;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+    }
+
+    public override void AnimationTrigger()
+    {
+        base.AnimationTrigger();
+    }
+
+    public override void AnimationFinishTrigger()
+    {
+        base.AnimationFinishTrigger();
     }
 
 }

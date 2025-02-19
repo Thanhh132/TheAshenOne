@@ -15,6 +15,7 @@ public class PlayerLandState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        player.SetVelocityX(0);
     }
 
     public override void Exit()
@@ -26,7 +27,7 @@ public class PlayerLandState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        if(moveInput != 0){
+        if(xInput != 0){
             stateMachine.ChangeState(player.MoveState);
         }else if(isAnimationFinished){
             stateMachine.ChangeState(player.IdleState);        

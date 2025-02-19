@@ -19,7 +19,6 @@ public class PlayerInAirState : PlayerState
     {
         base.DoCheck();
         isGrounded = player.IfGrounded();
-        isClimbable = player.IfClimbable();
     }
 
     public override void Enter()
@@ -48,10 +47,8 @@ public class PlayerInAirState : PlayerState
             player.FlipCheck(xInput);
             player.SetVelocityX(playerData.movementVelocity * xInput);
             player.Anim.SetFloat("YVelocity", player.CurrentVelocity.y);
-        }else if (isClimbable && grabInput)
-        {
-            stateMachine.ChangeState(player.GrabState);
-        }else if (isClimbable && xInput == player.FacingDirection && player.CurrentVelocity.y <= 0.01f)
+        }
+        else if (isClimbable && xInput == player.FacingDirection && player.CurrentVelocity.y <= 0.01f)
         {
             stateMachine.ChangeState(player.WallSlideState);
         }

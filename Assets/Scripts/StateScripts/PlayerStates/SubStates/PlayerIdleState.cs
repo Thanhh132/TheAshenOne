@@ -23,13 +23,14 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Exit()
     {
         base.Exit();
+
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if(moveInput != 0){
+        if(xInput != 0){
             stateMachine.ChangeState(player.MoveState);
         }
     }

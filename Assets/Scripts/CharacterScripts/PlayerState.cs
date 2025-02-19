@@ -26,7 +26,7 @@ public class PlayerState
     public virtual void Enter()
     {
         DoCheck();
-        player.Anim.SetBool(animBoolName, true);
+        player.Anim.Play(animBoolName);
         startTime = Time.time;
         Debug.Log(animBoolName);
         isAnimationFinished = false;
@@ -35,7 +35,6 @@ public class PlayerState
     // dc gọi khi rời khỏi state
     public virtual void Exit()
     {
-        player.Anim.SetBool(animBoolName, false);
     }
 
     //Gọi theo mỗi frameframe

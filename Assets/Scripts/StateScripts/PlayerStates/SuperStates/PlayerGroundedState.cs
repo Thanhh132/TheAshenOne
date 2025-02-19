@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
 {
-    protected float moveInput;
+    protected float xInput;
     protected bool jumpInput;
     private bool grabInput;
     private bool isGrounded;
@@ -19,7 +19,6 @@ public class PlayerGroundedState : PlayerState
     {
         base.DoCheck();
         isGrounded = player.IfGrounded();
-        isClimbable = player.IfClimbable();
     }
 
     public override void Enter()
@@ -36,16 +35,9 @@ public class PlayerGroundedState : PlayerState
     {
         base.LogicUpdate();
 
-        moveInput = player.InputHandle.XInput;
+        xInput = player.InputHandle.XInput;
         jumpInput = player.InputHandle.JumpInput;
         grabInput = player.InputHandle.GrabInput;
-
-        if(player.InputHandle.AttackInputs[(int)CombatInputs.primary])
-        {
-            stateMachine.ChangeState(player.PrimaryAttackState);
-        }else if(player.InputHandle.AttackInputs[(int)CombatInputs.secondary]){
-            stateMachine.ChangeState(player.SecondaryAttackState);
-        }
 
         if (jumpInput == true && isGrounded)
         {
@@ -54,9 +46,6 @@ public class PlayerGroundedState : PlayerState
         }else if (!isGrounded)
         {
             stateMachine.ChangeState(player.AirState);
-        }else if (grabInput && isClimbable)
-        {
-            stateMachine.ChangeState(player.GrabState);
         }
     }
 

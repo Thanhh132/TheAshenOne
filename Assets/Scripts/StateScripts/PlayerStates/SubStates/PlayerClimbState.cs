@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerClimbState : PlayerTouchingWallState
+public class PlayerClimbState : PlayerAbilityState
 {
     public PlayerClimbState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -22,10 +22,6 @@ public class PlayerClimbState : PlayerTouchingWallState
     {
         base.LogicUpdate();
         player.SetVelocityY(playerData.climbVelocity);
-
-        if(yInput != 1){
-            stateMachine.ChangeState(player.GrabState);
-        }
     }
 
     public override void PhysicsUpdate()

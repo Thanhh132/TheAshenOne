@@ -10,6 +10,4 @@ internal class AnimStrings
     internal static string playerWallSlide = "Player_WallSlide";
     internal static string playerSlide = "Player_Slide";
     internal static string playerRoll = "Player_Roll";
-    internal static string playerPrimaryAttack = "Player_PrimaryAttack";
-    internal static string playerSecondaryAttack = "Player_SecondaryAttack";
 }
