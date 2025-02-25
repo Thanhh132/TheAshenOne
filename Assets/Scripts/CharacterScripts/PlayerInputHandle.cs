@@ -7,17 +7,17 @@ public class PlayerInputHandle : MonoBehaviour
 {
     public float XInput {get; private set;}
     public float YInput {get; private set;}
+    public bool AttackInput {get; private set;}
     public bool JumpInput {get; private set;}
     public bool GrabInput {get; private set;}
     public bool SlideInput {get; private set;}
     public bool RollInput {get; private set;}
-    public bool[] AttackInputs {get; set;}
 
     [SerializeField]
 
     void Start()
     {
-        AttackInputs = new bool[2];
+
     }
     void Update()
     {
@@ -27,12 +27,8 @@ public class PlayerInputHandle : MonoBehaviour
         GrabInput = Input.GetKey(KeyCode.LeftControl);
         SlideInput = Input.GetKeyDown(KeyCode.LeftShift);
         RollInput = Input.GetKeyDown(KeyCode.C);
-        AttackInputs[0] = Input.GetKeyDown(KeyCode.Mouse0);
-        AttackInputs[1] = Input.GetKeyDown(KeyCode.Mouse1);
+        AttackInput = Input.GetKeyDown(KeyCode.Mouse0);
     }
     public void UseJumpInput() => JumpInput = false;  
 }
-public enum CombatInputs{
-    primary,
-    secondary,
-}
+

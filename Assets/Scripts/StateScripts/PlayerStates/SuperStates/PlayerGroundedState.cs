@@ -6,9 +6,8 @@ public class PlayerGroundedState : PlayerState
 {
     protected float xInput;
     protected bool jumpInput;
-    private bool grabInput;
+    protected bool attackInput;
     private bool isGrounded;
-    private bool isClimbable;
 
     public PlayerGroundedState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -37,20 +36,35 @@ public class PlayerGroundedState : PlayerState
 
         xInput = player.InputHandle.XInput;
         jumpInput = player.InputHandle.JumpInput;
-        grabInput = player.InputHandle.GrabInput;
+        attackInput = player.InputHandle.AttackInput;
 
         if (jumpInput == true && isGrounded)
         {
             player.InputHandle.UseJumpInput();
             stateMachine.ChangeState(player.JumpState);
-        }else if (!isGrounded)
+        }
+        else if (!isGrounded)
         {
             stateMachine.ChangeState(player.AirState);
+        }
+        else if (attackInput && isGrounded)
+        {
+            stateMachine.ChangeState(player.AttackState);
         }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+    }
+
+    public override void AnimationFinishTrigger()
+    {
+        base.AnimationFinishTrigger();
+    }
+
+    public override void AnimationTrigger()
+    {
+        base.AnimationTrigger();
     }
 }

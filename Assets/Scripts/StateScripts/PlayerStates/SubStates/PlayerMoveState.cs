@@ -25,6 +25,7 @@ public class PlayerMoveState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        player.Anim.Play(AnimStrings.playerWalk);
     }
 
     public override void Exit()

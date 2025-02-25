@@ -18,6 +18,7 @@ public class PlayerRollState : PlayerGroundedState
     {
         base.Enter();
         player.SetVelocityX(playerData.rollVelocity * player.FacingDirection);
+        player.Anim.Play(AnimStrings.playerRoll);
     }
 
     public override void Exit()

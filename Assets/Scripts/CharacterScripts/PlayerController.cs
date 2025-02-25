@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerInAirState AirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, AnimStrings.playerIdle);
         MoveState = new PlayerMoveState(this, StateMachine, playerData, AnimStrings.playerWalk);
+        AttackState = new PlayerAttackState(this, StateMachine, playerData, AnimStrings.playerAttack);
         JumpState = new PlayerJumpState(this, StateMachine, playerData, AnimStrings.playerJump);
         AirState = new PlayerInAirState(this, StateMachine, playerData, AnimStrings.playerInAir);
         LandState = new PlayerLandState(this, StateMachine, playerData, AnimStrings.playerLand);
@@ -62,8 +64,6 @@ public class PlayerController : MonoBehaviour
     {
         StateMachine.Initialize(IdleState);
         FacingDirection = 1;
-        int count = Enum.GetValues(typeof(CombatInputs)).Length;
-        InputHandle.AttackInputs = new bool[count];
     }
 
 

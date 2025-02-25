@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class PlayerAbilityState : PlayerState
 {
-    protected float xInput;
-    protected float yInput;
-    protected bool grabInput;
     protected bool isGrounded;
-    protected bool isTouchingWall;
-    protected bool isClimbable;
     protected bool isAbilityDone;
+
     public PlayerAbilityState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
+
     public override void DoCheck()
     {
         base.DoCheck();
@@ -34,12 +31,11 @@ public class PlayerAbilityState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         if (isGrounded && player.CurrentVelocity.y < 0.01f)
         {
             stateMachine.ChangeState(player.IdleState);
         }
-        else if(!isGrounded && player.CurrentVelocity.y > 0.01f)
+        else if (isGrounded && player.CurrentVelocity.y > 0.01f)
         {
             stateMachine.ChangeState(player.AirState);
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSlideState : PlayerGroundedState
 {
-    private bool dashInput;
+    private bool slideInput;
     protected bool isTouchingWall;
     public PlayerSlideState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -21,6 +21,7 @@ public class PlayerSlideState : PlayerGroundedState
     {
         base.Enter();
         player.SetVelocityX(playerData.slideVelocity * player.FacingDirection);
+        player.Anim.Play(AnimStrings.playerSlide);
     }
 
     public override void Exit()
@@ -32,8 +33,8 @@ public class PlayerSlideState : PlayerGroundedState
     {
         base.LogicUpdate();
         xInput = player.InputHandle.XInput;
-
-        dashInput = player.InputHandle.SlideInput;
+        slideInput = player.InputHandle.SlideInput;
+        
         if(isAnimationFinished || isTouchingWall){
             stateMachine.ChangeState(player.IdleState);
         }

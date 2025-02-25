@@ -26,7 +26,7 @@ public class PlayerState
     public virtual void Enter()
     {
         DoCheck();
-        player.Anim.Play(animBoolName);
+        // player.Anim.Play(animBoolName);
         startTime = Time.time;
         Debug.Log(animBoolName);
         isAnimationFinished = false;
@@ -35,14 +35,15 @@ public class PlayerState
     // dc gọi khi rời khỏi state
     public virtual void Exit()
     {
+
     }
 
     //Gọi theo mỗi frameframe
     public virtual void LogicUpdate()
     {
-        
+
     }
-    
+
     //đc gọi theo fixeupdate 
     public virtual void PhysicsUpdate()
     {
@@ -58,4 +59,5 @@ public class PlayerState
     public virtual void AnimationTrigger() { }
 
     public virtual void AnimationFinishTrigger() => isAnimationFinished = true;
+
 }

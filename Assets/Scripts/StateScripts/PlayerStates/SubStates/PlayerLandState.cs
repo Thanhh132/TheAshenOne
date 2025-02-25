@@ -16,6 +16,7 @@ public class PlayerLandState : PlayerGroundedState
     {
         base.Enter();
         player.SetVelocityX(0);
+        player.Anim.Play(AnimStrings.playerLand);
     }
 
     public override void Exit()

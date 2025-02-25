@@ -1,48 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackState : PlayerAbilityState
+public class PlayerAttackState : PlayerGroundedState
 {
+    private int attackCount = 1;
+    private int maxAttackCount = 4;
+    private bool canCombo = false;
+
     public PlayerAttackState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
-    }
-
-    public override void DoCheck()
-    {
-        base.DoCheck();
     }
 
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocityX(0f);
-        player.SetVelocityY(0f);
+        canCombo = false;
+        player.Anim.SetInteger("AttackCount", attackCount);
+        player.Anim.Play("Player_Attack_" + attackCount);
     }
 
     public override void Exit()
     {
         base.Exit();
+        canCombo = false;
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if(isAnimationFinished){
+        player.SetVelocityX(0f);
+
+        AnimatorStateInfo stateInfo = player.Anim.GetCurrentAnimatorStateInfo(0);
+
+        if (stateInfo.normalizedTime >= 0.5f && stateInfo.normalizedTime < 1.0f)
+        {
+            canCombo = true;
+        }
+
+        if (attackInput && canCombo)
+        {
+            attackCount++;
+            if (attackCount > maxAttackCount)
+            {
+                attackCount = 1;
+            }
+
+            player.Anim.SetInteger("AttackCount", attackCount);
+            player.Anim.Play("Player_Attack_" + attackCount);
+            canCombo = false; 
+        }
+
+        if (stateInfo.normalizedTime >= 1.0f || isAnimationFinished)
+        {
             stateMachine.ChangeState(player.IdleState);
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
-    public override void AnimationTrigger() {
-        base.AnimationTrigger();
-    }
-
-    public override void AnimationFinishTrigger() {
-        base.AnimationFinishTrigger();
     }
 }

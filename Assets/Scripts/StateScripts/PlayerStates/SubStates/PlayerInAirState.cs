@@ -14,7 +14,6 @@ public class PlayerInAirState : PlayerState
     {
     }
 
-
     public override void DoCheck()
     {
         base.DoCheck();
@@ -24,6 +23,7 @@ public class PlayerInAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.Anim.Play(AnimStrings.playerInAir);
     }
 
     public override void Exit()
@@ -42,15 +42,12 @@ public class PlayerInAirState : PlayerState
         if (isGrounded && player.CurrentVelocity.y < 0.01f)
         {
             stateMachine.ChangeState(player.LandState);
-        }else if (jumpInput)
+        }
+        else if (jumpInput)
         {
             player.FlipCheck(xInput);
             player.SetVelocityX(playerData.movementVelocity * xInput);
             player.Anim.SetFloat("YVelocity", player.CurrentVelocity.y);
-        }
-        else if (isClimbable && xInput == player.FacingDirection && player.CurrentVelocity.y <= 0.01f)
-        {
-            stateMachine.ChangeState(player.WallSlideState);
         }
     }
 

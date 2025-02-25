@@ -18,6 +18,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
         player.SetVelocityX(0f);
+        player.Anim.Play(AnimStrings.playerIdle);
     }
 
     public override void Exit()

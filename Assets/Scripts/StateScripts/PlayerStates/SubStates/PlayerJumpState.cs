@@ -16,6 +16,7 @@ public class PlayerJumpState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        player.Anim.Play(AnimStrings.playerInAir);
         player.SetVelocityY(playerData.jumpVelocity);
         isAbilityDone = true;
     }
@@ -44,5 +45,4 @@ public class PlayerJumpState : PlayerAbilityState
     {
         base.AnimationFinishTrigger();
     }
-
 }
