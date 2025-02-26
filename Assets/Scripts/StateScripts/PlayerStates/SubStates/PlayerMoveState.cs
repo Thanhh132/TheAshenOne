@@ -6,7 +6,6 @@ public class PlayerMoveState : PlayerGroundedState
 {
     private bool slideInput;
     private bool rollInput;
-    private bool isGrounded;
     private bool isTouchingWall;
     private bool isClimbable;
 

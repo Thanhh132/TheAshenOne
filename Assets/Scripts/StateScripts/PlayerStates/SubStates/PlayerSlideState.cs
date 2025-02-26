@@ -22,6 +22,7 @@ public class PlayerSlideState : PlayerGroundedState
         base.Enter();
         player.SetVelocityX(playerData.slideVelocity * player.FacingDirection);
         player.Anim.Play(AnimStrings.playerSlide);
+        isAbilityDone = false;
     }
 
     public override void Exit()
@@ -36,6 +37,7 @@ public class PlayerSlideState : PlayerGroundedState
         slideInput = player.InputHandle.SlideInput;
         
         if(isAnimationFinished || isTouchingWall){
+            isAbilityDone = true;
             stateMachine.ChangeState(player.IdleState);
         }
 

@@ -26,7 +26,7 @@ public class PlayerInputHandle : MonoBehaviour
         JumpInput = Input.GetButtonDown("Jump");
         GrabInput = Input.GetKey(KeyCode.LeftControl);
         SlideInput = Input.GetKeyDown(KeyCode.LeftShift);
-        RollInput = Input.GetKeyDown(KeyCode.C);
+        RollInput = Input.GetKeyDown(KeyCode.Mouse1);
         AttackInput = Input.GetKeyDown(KeyCode.Mouse0);
     }
     public void UseJumpInput() => JumpInput = false;  

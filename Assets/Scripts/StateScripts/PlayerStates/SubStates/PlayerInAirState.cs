@@ -24,6 +24,7 @@ public class PlayerInAirState : PlayerState
     {
         base.Enter();
         player.Anim.Play(AnimStrings.playerInAir);
+        isAbilityDone = false;
     }
 
     public override void Exit()
@@ -43,7 +44,7 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.LandState);
         }
-        else if (jumpInput)
+        else if (jumpInput && isAbilityDone)
         {
             player.FlipCheck(xInput);
             player.SetVelocityX(playerData.movementVelocity * xInput);

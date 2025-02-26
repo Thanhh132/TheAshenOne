@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerAttackState : PlayerGroundedState
 {
+    
     private int attackCount = 1;
     private int maxAttackCount = 4;
     private bool canCombo = false;
@@ -16,6 +17,7 @@ public class PlayerAttackState : PlayerGroundedState
         canCombo = false;
         player.Anim.SetInteger("AttackCount", attackCount);
         player.Anim.Play("Player_Attack_" + attackCount);
+        isAbilityDone = false;
     }
 
     public override void Exit()
@@ -51,6 +53,8 @@ public class PlayerAttackState : PlayerGroundedState
 
         if (stateInfo.normalizedTime >= 1.0f || isAnimationFinished)
         {
+            isAbilityDone = true;
+            attackCount = 1;
             stateMachine.ChangeState(player.IdleState);
         }
     }

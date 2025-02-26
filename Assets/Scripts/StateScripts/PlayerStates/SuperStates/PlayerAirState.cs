@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAbilityState : PlayerState
+public class PlayerAirState : PlayerState
 {
+    protected bool attackInput;
     protected bool isGrounded;
-    protected bool isAbilityDone;
-
-    public PlayerAbilityState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    
+    public PlayerAirState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -33,7 +33,7 @@ public class PlayerAbilityState : PlayerState
         base.LogicUpdate();
         if (isGrounded && player.CurrentVelocity.y < 0.01f)
         {
-            stateMachine.ChangeState(player.IdleState);
+            stateMachine.ChangeState(player.LandState);
         }
         else if (isGrounded && player.CurrentVelocity.y > 0.01f)
         {

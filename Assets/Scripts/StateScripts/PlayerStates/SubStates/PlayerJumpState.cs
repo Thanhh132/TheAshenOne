@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerAbilityState
+public class PlayerJumpState : PlayerAirState
 {
     public PlayerJumpState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -18,7 +18,7 @@ public class PlayerJumpState : PlayerAbilityState
         base.Enter();
         player.Anim.Play(AnimStrings.playerInAir);
         player.SetVelocityY(playerData.jumpVelocity);
-        isAbilityDone = true;
+        isAbilityDone = false;
     }
 
     public override void Exit()

@@ -19,6 +19,7 @@ public class PlayerRollState : PlayerGroundedState
         base.Enter();
         player.SetVelocityX(playerData.rollVelocity * player.FacingDirection);
         player.Anim.Play(AnimStrings.playerRoll);
+        isAbilityDone = false;
     }
 
     public override void Exit()
@@ -30,6 +31,7 @@ public class PlayerRollState : PlayerGroundedState
     {
         base.LogicUpdate();
         if(isAnimationFinished){
+            isAbilityDone = true;
             stateMachine.ChangeState(player.IdleState);
         }
     }

@@ -12,6 +12,7 @@ public class PlayerState
     //thời gian bắt đầy state 
     protected float startTime;
     protected bool isAnimationFinished;
+    protected bool isAbilityDone;
     private string animBoolName;
 
     public PlayerState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
@@ -26,7 +27,6 @@ public class PlayerState
     public virtual void Enter()
     {
         DoCheck();
-        // player.Anim.Play(animBoolName);
         startTime = Time.time;
         Debug.Log(animBoolName);
         isAnimationFinished = false;
@@ -35,7 +35,7 @@ public class PlayerState
     // dc gọi khi rời khỏi state
     public virtual void Exit()
     {
-
+        isAnimationFinished = true;
     }
 
     //Gọi theo mỗi frameframe
