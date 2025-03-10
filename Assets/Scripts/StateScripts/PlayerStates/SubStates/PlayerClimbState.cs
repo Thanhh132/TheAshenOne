@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerClimbState : PlayerAirState
 {
-    public PlayerClimbState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -21,7 +21,7 @@ public class PlayerClimbState : PlayerAirState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        player.SetVelocityY(playerData.climbVelocity);
+        core.Movement.SetVelocityY(playerData.climbVelocity);
     }
 
     public override void PhysicsUpdate()

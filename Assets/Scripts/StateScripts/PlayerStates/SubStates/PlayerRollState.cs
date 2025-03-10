@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRollState : PlayerGroundedState
 {
-    public PlayerRollState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerRollState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -17,7 +17,7 @@ public class PlayerRollState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocityX(playerData.rollVelocity * player.FacingDirection);
+        core.Movement.SetVelocityX(playerData.rollVelocity * core.Movement.FacingDirection);
         player.Anim.Play(AnimStrings.playerRoll);
         isAbilityDone = false;
     }

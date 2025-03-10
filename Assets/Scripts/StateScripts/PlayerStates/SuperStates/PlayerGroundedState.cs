@@ -10,7 +10,7 @@ public class PlayerGroundedState : PlayerState
     protected bool isGrounded;
 
 
-    public PlayerGroundedState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
 
     }
@@ -18,7 +18,7 @@ public class PlayerGroundedState : PlayerState
     public override void DoCheck()
     {
         base.DoCheck();
-        isGrounded = player.IfGrounded();
+        isGrounded = player.Core.CollisionSenses.IfGrounded;
     }
 
     public override void Enter()

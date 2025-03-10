@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerState
 {
-    protected PlayerController player;
+    protected Core core;
+    protected Player player;
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
 
@@ -15,12 +16,13 @@ public class PlayerState
     protected bool isAbilityDone;
     private string animBoolName;
 
-    public PlayerState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
+    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
     {
         this.player = player;
         this.stateMachine = stateMachine;
         this.playerData = playerData;
         this.animBoolName = animBoolName;
+        core = player.Core;
     }
 
     // đc gọi khi vào một state cụ thể

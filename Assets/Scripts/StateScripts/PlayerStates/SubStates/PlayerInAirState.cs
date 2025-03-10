@@ -10,14 +10,14 @@ public class PlayerInAirState : PlayerState
     private bool isClimbable;
     private bool grabInput;
 
-    public PlayerInAirState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
     public override void DoCheck()
     {
         base.DoCheck();
-        isGrounded = player.IfGrounded();
+        isGrounded = player.Core.CollisionSenses.IfGrounded;
     }
 
     public override void Enter()
@@ -46,8 +46,8 @@ public class PlayerInAirState : PlayerState
         }
         else if (jumpInput && isAbilityDone)
         {
-            player.FlipCheck(xInput);
-            player.SetVelocityX(playerData.movementVelocity * xInput);
+            core.Movement.FlipCheck(xInput);
+            core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
             player.Anim.SetFloat("YVelocity", player.CurrentVelocity.y);
         }
     }

@@ -23,9 +23,4 @@ public class PlayerData : ScriptableObject
     [Header("Roll State")]
     public float rollVelocity = 10f;
 
-    [Header("Check Variables")]
-    public float groundCheckRadius = 0.3f;
-    public float wallCheckDistance = 0.5f;
-    public LayerMask isGrounded;
-    public LayerMask isTouchingWall;
 }

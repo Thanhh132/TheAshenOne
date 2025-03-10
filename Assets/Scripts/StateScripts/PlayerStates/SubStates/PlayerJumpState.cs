@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAirState
 {
-    public PlayerJumpState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -17,7 +17,7 @@ public class PlayerJumpState : PlayerAirState
     {
         base.Enter();
         player.Anim.Play(AnimStrings.playerInAir);
-        player.SetVelocityY(playerData.jumpVelocity);
+        core.Movement.SetVelocityY(playerData.jumpVelocity);
         isAbilityDone = false;
     }
 

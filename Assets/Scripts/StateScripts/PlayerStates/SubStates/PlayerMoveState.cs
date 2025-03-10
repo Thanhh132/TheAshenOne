@@ -9,7 +9,7 @@ public class PlayerMoveState : PlayerGroundedState
     private bool isTouchingWall;
     private bool isClimbable;
 
-    public PlayerMoveState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -17,8 +17,8 @@ public class PlayerMoveState : PlayerGroundedState
     public override void DoCheck()
     {
         base.DoCheck();
-        isGrounded = player.IfGrounded();
-        isTouchingWall = player.IfTouchingWall();
+        isGrounded = player.Core.CollisionSenses.IfGrounded;
+        isTouchingWall = player.Core.CollisionSenses.IfTouchingWall;
     }
 
     public override void Enter()
@@ -35,12 +35,11 @@ public class PlayerMoveState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        player.FlipCheck(xInput);
-
+        core.Movement.FlipCheck(xInput);
         slideInput = player.InputHandle.SlideInput;
         rollInput = player.InputHandle.RollInput;
 
-        player.SetVelocityX(playerData.movementVelocity * xInput);
+        core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
         if (xInput == 0)
         {
             stateMachine.ChangeState(player.IdleState);

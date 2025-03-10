@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
@@ -23,26 +23,28 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Components
+    public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandle InputHandle { get; private set; }
     public Rigidbody2D RB { get; private set; }
     #endregion
 
     public Vector2 CurrentVelocity { get; private set; }
-    public int FacingDirection { get; private set; }
+    // public int FacingDirection { get; private set; }
 
 
-    [SerializeField]
-    private Transform groundCheck;
+    // [SerializeField]
+    // private Transform groundCheck;
 
-    [SerializeField]
-    private Transform wallCheck;
+    // [SerializeField]
+    // private Transform wallCheck;
     public Vector2 workspace;
 
     private void Awake()
     {
+        
+        Core = GetComponentInChildren<Core>();
         StateMachine = new PlayerStateMachine();
-
         Anim = GetComponent<Animator>();
         InputHandle = GetComponent<PlayerInputHandle>();
         RB = GetComponent<Rigidbody2D>();
@@ -63,13 +65,14 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         StateMachine.Initialize(IdleState);
-        FacingDirection = 1;
+        // FacingDirection = 1;
     }
 
 
     private void Update()
     {
         CurrentVelocity = RB.velocity;
+        Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
     }
 
@@ -78,48 +81,49 @@ public class PlayerController : MonoBehaviour
         StateMachine.CurrentState.PhysicsUpdate();
     }
 
-    public void SetVelocityX(float velocity)
-    {
-        workspace.Set(velocity, CurrentVelocity.y);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
+    // public void SetVelocityX(float velocity)
+    // {
+    //     workspace.Set(velocity, CurrentVelocity.y);
+    //     RB.velocity = workspace;
+    //     CurrentVelocity = workspace;
+    // }
 
-    public void SetVelocityY(float velocity)
-    {
-        workspace.Set(CurrentVelocity.x, velocity);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
+    // public void SetVelocityY(float velocity)
+    // {
+    //     workspace.Set(CurrentVelocity.x, velocity);
+    //     RB.velocity = workspace;
+    //     CurrentVelocity = workspace;
+    // }
 
-    public void FlipCheck(float input)
-    {
-        if (input != 0 && input != FacingDirection)
-        {
-            Flip();
-        }
-    }
+    // public void FlipCheck(float input)
+    // {
+    //     if (input != 0 && input != FacingDirection)
+    //     {
+    //         Flip();
+    //     }
+    // }
+    
+    // private void Flip()
+    // {
+    //     FacingDirection *= -1;
+    //     transform.Rotate(0, 180, 0);
+    // }
+    
 
-    public bool IfGrounded()
-    {
-        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.isGrounded);
-        Debug.Log("Is Touching Ground");
-        return isGrounded;
-    }
+    // public bool IfGrounded()
+    // {
+    //     bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.isGrounded);
+    //     Debug.Log("Is Touching Ground");
+    //     return isGrounded;
+    // }
 
 
-    public bool IfTouchingWall()
-    {
-        bool isTouchingWall = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.isTouchingWall);
-        Debug.Log("Is Touching Wall");
-        return isTouchingWall;
-    }
-
-    private void Flip()
-    {
-        FacingDirection *= -1;
-        transform.Rotate(0, 180, 0);
-    }
+    // public bool IfTouchingWall()
+    // {
+    //     bool isTouchingWall = Physics2D.Raycast(wallCheck.position, Vector2.right * Core.Movement.FacingDirection, playerData.wallCheckDistance, playerData.isTouchingWall);
+    //     Debug.Log("Is Touching Wall");
+    //     return isTouchingWall;
+    // }
 
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 

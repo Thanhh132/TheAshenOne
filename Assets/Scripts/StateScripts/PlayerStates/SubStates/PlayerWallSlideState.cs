@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWallSlideState : PlayerAirState
 {
-    public PlayerWallSlideState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerWallSlideState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -20,7 +20,7 @@ public class PlayerWallSlideState : PlayerAirState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        player.SetVelocityY(-playerData.wallSlideVelocity);
+        core.Movement.SetVelocityY(-playerData.wallSlideVelocity);
      
     }
 }

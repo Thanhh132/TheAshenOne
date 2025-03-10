@@ -7,7 +7,7 @@ public class PlayerAttackState : PlayerGroundedState
     private int maxAttackCount = 4;
     private bool canCombo = false;
 
-    public PlayerAttackState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -15,7 +15,7 @@ public class PlayerAttackState : PlayerGroundedState
     {
         base.Enter();
         canCombo = false;
-        player.Anim.SetInteger("AttackCount", attackCount);
+        // player.Anim.SetInteger("AttackCount", attackCount);
         player.Anim.Play("Player_Attack_" + attackCount);
         isAbilityDone = false;
     }
@@ -29,7 +29,7 @@ public class PlayerAttackState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        player.SetVelocityX(0f);
+        core.Movement.SetVelocityX(0f);
 
         AnimatorStateInfo stateInfo = player.Anim.GetCurrentAnimatorStateInfo(0);
 
@@ -46,7 +46,7 @@ public class PlayerAttackState : PlayerGroundedState
                 attackCount = 1;
             }
 
-            player.Anim.SetInteger("AttackCount", attackCount);
+            // player.Anim.SetInteger("AttackCount", attackCount);
             player.Anim.Play("Player_Attack_" + attackCount);
             canCombo = false; 
         }

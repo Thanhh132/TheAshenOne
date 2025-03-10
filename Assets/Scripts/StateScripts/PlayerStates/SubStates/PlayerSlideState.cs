@@ -6,7 +6,7 @@ public class PlayerSlideState : PlayerGroundedState
 {
     private bool slideInput;
     protected bool isTouchingWall;
-    public PlayerSlideState(PlayerController player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerSlideState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -14,13 +14,13 @@ public class PlayerSlideState : PlayerGroundedState
     public override void DoCheck()
     {
         base.DoCheck();
-        isTouchingWall = player.IfTouchingWall();
+        isTouchingWall = player.Core.CollisionSenses.IfTouchingWall;
     }
 
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocityX(playerData.slideVelocity * player.FacingDirection);
+        core.Movement.SetVelocityX(playerData.slideVelocity * core.Movement.FacingDirection);
         player.Anim.Play(AnimStrings.playerSlide);
         isAbilityDone = false;
     }
