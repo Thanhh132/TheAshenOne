@@ -1,11 +1,13 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerAttackState : PlayerGroundedState
 {
-    
+
     private int attackCount = 1;
     private int maxAttackCount = 4;
     private bool canCombo = false;
+    [SerializeField] private float attackDamage;
 
     public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -15,9 +17,9 @@ public class PlayerAttackState : PlayerGroundedState
     {
         base.Enter();
         canCombo = false;
-        // player.Anim.SetInteger("AttackCount", attackCount);
         player.Anim.Play("Player_Attack_" + attackCount);
         isAbilityDone = false;
+
     }
 
     public override void Exit()
@@ -45,10 +47,8 @@ public class PlayerAttackState : PlayerGroundedState
             {
                 attackCount = 1;
             }
-
-            // player.Anim.SetInteger("AttackCount", attackCount);
             player.Anim.Play("Player_Attack_" + attackCount);
-            canCombo = false; 
+            canCombo = false;
         }
 
         if (stateInfo.normalizedTime >= 1.0f || isAnimationFinished)
@@ -58,4 +58,12 @@ public class PlayerAttackState : PlayerGroundedState
             stateMachine.ChangeState(player.IdleState);
         }
     }
+
+    public override void AnimationTrigger()
+    {
+        base.AnimationTrigger();
+        
+    }
+
+
 }

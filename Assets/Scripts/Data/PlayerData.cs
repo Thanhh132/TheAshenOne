@@ -23,4 +23,7 @@ public class PlayerData : ScriptableObject
     [Header("Roll State")]
     public float rollVelocity = 10f;
 
+    [Header("Stats")]
+    public float damage;
+
 }

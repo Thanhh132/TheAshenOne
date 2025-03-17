@@ -37,12 +37,15 @@ public class Movement : CoreComponent
         RB.velocity = workspace;
         CurrentVelocity = workspace;
     }
-    
+
     private void Flip()
     {
         FacingDirection *= -1;
-        RB.transform.Rotate(0, 180, 0);
+        Vector3 scale = RB.transform.localScale;
+        scale.x *= -1; 
+        RB.transform.localScale = scale;
     }
+
 
     public void FlipCheck(float input)
     {
