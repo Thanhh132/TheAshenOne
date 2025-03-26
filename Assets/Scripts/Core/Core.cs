@@ -22,15 +22,23 @@ public class Core : MonoBehaviour
         private set => combat = value; 
     }
 
+    public DetectingSenses DetectingSenses
+    {
+        get => GenericNotImplementedError<DetectingSenses>.TryGet(detectingSenses, transform.parent.name);
+        private set => detectingSenses = value; 
+    }
+
     private Movement movement;
     private CollisionSenses collisionSenses;
     private Combat combat;
+    private DetectingSenses detectingSenses;
 
     public void Awake()
     {
         Movement = GetComponentInChildren<Movement>();
         CollisionSenses = GetComponentInChildren<CollisionSenses>();
         Combat = GetComponentInChildren<Combat>();
+        detectingSenses = GetComponentInChildren<DetectingSenses>();
     }
     
     public void LogicUpdate()

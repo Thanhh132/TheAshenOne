@@ -44,11 +44,17 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.LandState);
         }
-        else if (jumpInput && isAbilityDone)
+        else
         {
-            core.Movement.FlipCheck(xInput);
-            core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
-            player.Anim.SetFloat("YVelocity", player.CurrentVelocity.y);
+            if (xInput != 0 && !player.Core.CollisionSenses.IfTouchingWall)
+            {
+                core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+            }
+            else if (player.Core.CollisionSenses.IfTouchingWall && xInput != 0)
+            {
+                float wallPushForce = 1f; 
+                core.Movement.SetVelocityX(wallPushForce * core.Movement.FacingDirection);
+            }
         }
     }
 

@@ -170,7 +170,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1, y: -0.14999998}
+  m_Offset: {x: -0.03963375, y: -0.10573149}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.52, y: 0.39}
@@ -181,7 +181,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1, y: 2.8}
+  m_Size: {x: 0.85048866, y: 2.888537}
   m_EdgeRadius: 0
 --- !u!114 &5217223722889041507
 MonoBehaviour:
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 5
-  knockBackAngle: {x: 1, y: 3}
+  knockBackAngle: {x: 0, y: 2}
   knockBackStrength: 2
 --- !u!1 &2754951920041358827
 GameObject:
@@ -337,7 +337,7 @@ Transform:
   m_GameObject: {fileID: 2754951920041358827}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09000003, y: 0.3800001, z: 0}
+  m_LocalPosition: {x: 0.72, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -368,7 +368,7 @@ Transform:
   m_GameObject: {fileID: 2890036714353341181}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.100000024, y: -1.58, z: 0}
+  m_LocalPosition: {x: -0.534, y: -1.539, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -763,7 +763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 8
-  knockBackAngle: {x: 2, y: 1}
+  knockBackAngle: {x: 2, y: 0}
   knockBackStrength: 2
 --- !u!1 &7458476051081565888
 GameObject:
@@ -813,12 +813,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 1162445571939775423}
   wallCheck: {fileID: 3855655354702377427}
+  ledgeCheck: {fileID: 0}
   groundCheckRadius: 0.05
   wallCheckDistance: 0.05
+  ledgeCheckDistance: 0.5
   isGrounded:
     serializedVersion: 2
     m_Bits: 8
   isTouchingWall:
+    serializedVersion: 2
+    m_Bits: 8
+  isTouchingLedge:
     serializedVersion: 2
     m_Bits: 8
 --- !u!1 &8257170940625575001
@@ -918,5 +923,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
-  knockBackAngle: {x: 3, y: 1}
+  knockBackAngle: {x: 3, y: 0}
   knockBackStrength: 2

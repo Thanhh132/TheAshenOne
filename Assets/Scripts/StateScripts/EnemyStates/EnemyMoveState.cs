@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyMoveState : EnemyState
 {
+    private bool isEnemyInChasingArea;
+    private bool enemyCheck;
     private bool ledgeCheck;
     private bool wallCheck;
 
@@ -15,8 +17,9 @@ public class EnemyMoveState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        ledgeCheck = enemy.LedgeCheck();
-        wallCheck = enemy.WallCheck();
+        ledgeCheck = enemy.Core.CollisionSenses.IfTouchingLedge;
+        wallCheck = enemy.Core.CollisionSenses.IfTouchingWall;
+        enemyCheck = enemy.Core.DetectingSenses.IsEnemy;
     }
     public override void Enter()
     {
@@ -32,9 +35,14 @@ public class EnemyMoveState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        enemy.SetVelocityX(enemyData.movementVelocity * enemy.FacingDirection);
+        enemy.Core.Movement.SetVelocityX(enemyData.movementVelocity * enemy.Core.Movement.FacingDirection);
 
-        if(wallCheck || ledgeCheck){
+        if (enemyCheck)
+        {
+            eStateMachine.ChangeState(enemy.DetectedState);
+        }
+        else if (wallCheck || ledgeCheck)
+        {
             eStateMachine.ChangeState(enemy.IdleState);
         }
     }
@@ -43,7 +51,6 @@ public class EnemyMoveState : EnemyState
     {
         base.PhysicsUpdate();
     }
-
 
 }
 

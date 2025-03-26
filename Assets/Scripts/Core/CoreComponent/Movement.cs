@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Movement : CoreComponent
@@ -38,7 +39,7 @@ public class Movement : CoreComponent
         CurrentVelocity = workspace;
     }
 
-    private void Flip()
+    public void Flip()
     {
         FacingDirection *= -1;
         Vector3 scale = RB.transform.localScale;

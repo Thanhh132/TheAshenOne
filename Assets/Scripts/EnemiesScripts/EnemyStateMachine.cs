@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStateMachine 
+public class EnemyStateMachine
 {
     public EnemyState CurrentState { get; private set; }
 
@@ -18,4 +18,15 @@ public class EnemyStateMachine
         CurrentState = newState;
         CurrentState.Enter();
     }
+
+    public void ForceChangeState(EnemyState newState)
+    {
+        if (CurrentState != newState)
+        {
+            CurrentState.Exit();
+            CurrentState = newState;
+            CurrentState.Enter();
+        }
+    }
+
 }

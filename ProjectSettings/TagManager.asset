@@ -16,8 +16,8 @@ TagManager:
   - ClimbableObject
   - AttackHitbox
   - Enemy
-  - 
-  - 
+  - EAttackHitbox
+  - Collision
   - 
   - 
   - 

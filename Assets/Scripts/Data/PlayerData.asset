@@ -14,15 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementVelocity: 12
   slideVelocity: 10
-  jumpVelocity: 17
+  jumpVelocity: 15
   climbVelocity: 3
   wallSlideVelocity: 3
   rollVelocity: 10
-  groundCheckRadius: 0.3
-  wallCheckDistance: 0.5
-  isGrounded:
-    serializedVersion: 2
-    m_Bits: 8
-  isTouchingWall:
-    serializedVersion: 2
-    m_Bits: 8
+  damage: 0

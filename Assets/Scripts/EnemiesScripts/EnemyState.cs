@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyState 
+public class EnemyState
 {
     protected Enemy enemy;
     protected EnemyStateMachine eStateMachine;
@@ -29,7 +29,7 @@ public class EnemyState
         isAnimationFinished = false;
     }
 
-        // dc gọi khi rời khỏi state
+    // dc gọi khi rời khỏi state
     public virtual void Exit()
     {
         isAnimationFinished = true;
@@ -38,7 +38,7 @@ public class EnemyState
     //Gọi theo mỗi frameframe
     public virtual void LogicUpdate()
     {
-
+        DoCheck();
     }
 
     //đc gọi theo fixeupdate 
@@ -52,6 +52,7 @@ public class EnemyState
     {
 
     }
+
 
     public virtual void AnimationTrigger() { }
 
