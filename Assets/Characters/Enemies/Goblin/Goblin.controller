@@ -1,13 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1102 &-2348344129125429408
+--- !u!1102 &-8873837432383779587
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Move
+  m_Name: Goblin_Move
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -26,14 +26,14 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-1124803126754889300
+--- !u!1102 &-7992390894884153175
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Stuned
+  m_Name: Goblin_Stuned
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -52,14 +52,14 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-1067956487398974518
+--- !u!1102 &-1356843634724681555
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Attack
+  m_Name: Goblin_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -110,17 +110,17 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 6527259827445821761}
-    m_Position: {x: 380, y: 70, z: 0}
+    m_State: {fileID: -8873837432383779587}
+    m_Position: {x: 330, y: 90, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -2348344129125429408}
-    m_Position: {x: 380, y: 30, z: 0}
+    m_State: {fileID: 5891434461779584688}
+    m_Position: {x: 330, y: 130, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -1067956487398974518}
-    m_Position: {x: 380, y: 110, z: 0}
+    m_State: {fileID: -1356843634724681555}
+    m_Position: {x: 330, y: 170, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -1124803126754889300}
-    m_Position: {x: 415, y: 175, z: 0}
+    m_State: {fileID: -7992390894884153175}
+    m_Position: {x: 330, y: 210, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -130,15 +130,15 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -2348344129125429408}
---- !u!1102 &6527259827445821761
+  m_DefaultState: {fileID: -8873837432383779587}
+--- !u!1102 &5891434461779584688
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Idle
+  m_Name: Goblin_Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

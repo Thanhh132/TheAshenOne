@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class EnemyDetectedState : EnemyState
 {
-    private bool isEnemyInChasingArea;
-    private bool isEnemyInAttackArea;
-    private bool wallCheck;
-    private bool ledgeCheck;
-    private float charge = 0.5f;
-    private float chargeTimer;
+    protected bool isEnemyInChasingArea;
+    protected bool isEnemyInAttackArea;
+
+    protected bool wallCheck;
+    protected bool ledgeCheck;
+
+    protected float charge = 0.5f;
+    protected float chargeTimer;
 
     public EnemyDetectedState(Enemy enemy, EnemyStateMachine eStateMachine, EnemyData enemyData, string animBoolName)
         : base(enemy, eStateMachine, enemyData, animBoolName)
@@ -32,7 +34,7 @@ public class EnemyDetectedState : EnemyState
         
         chargeTimer = 0f;
         enemy.Core.Movement.SetVelocityX(0f);
-        enemy.Anim.Play(AnimStrings.enemyIdle);
+        enemy.Anim.Play(AnimStrings.goblinIdle);
     }
 
     public override void Exit()
@@ -44,15 +46,6 @@ public class EnemyDetectedState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        if (isEnemyInChasingArea)
-        {
-            chargeTimer += Time.deltaTime;
-            if (chargeTimer >= charge)
-            {
-                eStateMachine.ChangeState(enemy.ChasingState);
-            }
-        }
     }
 
     public override void PhysicsUpdate()

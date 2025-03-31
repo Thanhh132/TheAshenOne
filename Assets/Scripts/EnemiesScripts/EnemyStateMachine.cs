@@ -19,14 +19,4 @@ public class EnemyStateMachine
         CurrentState.Enter();
     }
 
-    public void ForceChangeState(EnemyState newState)
-    {
-        if (CurrentState != newState)
-        {
-            CurrentState.Exit();
-            CurrentState = newState;
-            CurrentState.Enter();
-        }
-    }
-
 }

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class EnemyMoveState : EnemyState
 {
-    private bool isEnemyInChasingArea;
-    private bool enemyCheck;
-    private bool ledgeCheck;
-    private bool wallCheck;
+    protected bool isEnemyInChasingArea;
+    protected bool enemyCheck;
+    protected bool ledgeCheck;
+    protected bool wallCheck;
 
     public EnemyMoveState(Enemy enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
     {
@@ -24,7 +24,7 @@ public class EnemyMoveState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        enemy.Anim.Play(AnimStrings.enemyMove);
+        enemy.Anim.Play(AnimStrings.goblinMove);
     }
 
     public override void Exit()
@@ -36,15 +36,6 @@ public class EnemyMoveState : EnemyState
     {
         base.LogicUpdate();
         enemy.Core.Movement.SetVelocityX(enemyData.movementVelocity * enemy.Core.Movement.FacingDirection);
-
-        if (enemyCheck)
-        {
-            eStateMachine.ChangeState(enemy.DetectedState);
-        }
-        else if (wallCheck || ledgeCheck)
-        {
-            eStateMachine.ChangeState(enemy.IdleState);
-        }
     }
 
     public override void PhysicsUpdate()

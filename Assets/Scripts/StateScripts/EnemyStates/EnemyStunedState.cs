@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyStunedState : EnemyState
 {
-    private bool isEnemyInChasingArea;
+    protected bool isEnemyInChasingArea;
     public EnemyStunedState(Enemy enemy, EnemyStateMachine eStateMachine, EnemyData enemyData, string animBoolName) : base(enemy, eStateMachine, enemyData, animBoolName)
     {
     }
@@ -18,7 +18,7 @@ public class EnemyStunedState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        enemy.Anim.Play(AnimStrings.enemyStuned);
+        enemy.Anim.Play(AnimStrings.goblinStuned);
         enemy.Core.Movement.SetVelocityX(0);
     }
 
@@ -30,18 +30,6 @@ public class EnemyStunedState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (isAnimationFinished)
-        {
-            if (isEnemyInChasingArea)
-            {
-                eStateMachine.ChangeState(enemy.ChasingState);
-            }
-            else
-            {
-                eStateMachine.ChangeState(enemy.IdleState);
-            }
-        }
-
     }
 
     public override void PhysicsUpdate()

@@ -78,7 +78,7 @@ public class Player : MonoBehaviour, IStunable
 
     public void ApplyStun()
     {
-        StateMachine.ForceChangeState(StunedState);
+        StateMachine.ChangeState(StunedState);
     }
 
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();

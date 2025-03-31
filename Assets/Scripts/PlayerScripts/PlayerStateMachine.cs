@@ -19,13 +19,4 @@ public class PlayerStateMachine
         CurrentState.Enter();
     }
 
-    public void ForceChangeState(PlayerState newState)
-    {
-        if (CurrentState != newState)
-        {
-            CurrentState.Exit();
-            CurrentState = newState;
-            CurrentState.Enter();
-        }
-    }
 }

@@ -5,18 +5,16 @@ using UnityEngine;
 
 public class EnemyChasingState : EnemyState
 {
-    private bool isEnemyInAttackArea;
-    private bool isEnemyInChasingArea;
+    protected bool isEnemyInAttackArea;
+    protected bool isEnemyInChasingArea;
 
-    private bool wallCheck;
-    private bool ledgeCheck;
-    private bool IsEnemy;
-    private bool isGrounded;
+    protected bool wallCheck;
+    protected bool ledgeCheck;
 
-    private float attackTimer;
-    private float giveUpTimer;
+    protected float attackTimer;
+    protected float giveUpTimer;
 
-    private float giveUpDuration = 3f;
+    protected float giveUpDuration = 3f;
 
     public EnemyChasingState(Enemy enemy, EnemyStateMachine eStateMachine, EnemyData enemyData, string animBoolName)
         : base(enemy, eStateMachine, enemyData, animBoolName)
@@ -38,7 +36,7 @@ public class EnemyChasingState : EnemyState
         base.Enter();
         attackTimer = enemyData.attackCooldown;
         giveUpTimer = giveUpDuration;
-        enemy.Anim.Play(AnimStrings.enemyMove);
+        enemy.Anim.Play(AnimStrings.goblinMove);
 
     }
 
@@ -48,42 +46,6 @@ public class EnemyChasingState : EnemyState
         Transform target = enemy.Core.DetectingSenses.GetEnemyTarget();
         attackTimer -= Time.deltaTime;
         giveUpTimer -= Time.deltaTime;
-
-        // Dừng lại nếu ở khu vực tấn công
-        if (isEnemyInAttackArea)
-        {
-            enemy.Core.Movement.SetVelocityX(0);
-            enemy.Anim.Play(AnimStrings.enemyIdle);
-            if (attackTimer <= 0)
-            {
-                eStateMachine.ChangeState(enemy.EAttackState);
-            }
-            return;
-        }
-
-        if (target != null)
-        {
-            float direction = Mathf.Sign(target.position.x - enemy.transform.position.x);
-
-            if (direction != enemy.Core.Movement.FacingDirection)
-            {
-                enemy.Core.Movement.Flip();
-            }
-            if (!wallCheck && !ledgeCheck)
-            {
-                enemy.Anim.Play(AnimStrings.enemyMove);
-                enemy.Core.Movement.SetVelocityX(enemyData.movementVelocity * direction);
-            }
-            else
-            {
-
-                eStateMachine.ChangeState(enemy.IdleState); 
-            }
-        }
-        else if (giveUpTimer <= 0)
-        {
-            eStateMachine.ChangeState(enemy.IdleState); 
-        }
     }
 
     public override void PhysicsUpdate()

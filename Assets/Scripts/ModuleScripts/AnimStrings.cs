@@ -1,5 +1,6 @@
 internal class AnimStrings
 {
+    #region Player Animations
     internal static string playerWalk = "Player_Walk";
     internal static string playerIdle = "Player_Idle";
     internal static string playerAttack = "Player_Attack";
@@ -12,10 +13,13 @@ internal class AnimStrings
     internal static string playerWallSlide = "Player_WallSlide";
     internal static string playerSlide = "Player_Slide";
     internal static string playerRoll = "Player_Roll";
-
-    internal static string enemyIdle = "Enemy_Idle";
-    internal static string enemyMove = "Enemy_Move";
-    internal static string enemyChasing = "Enemy_Chasing";
-    internal static string enemyAttack = "Enemy_Attack";
-    internal static string enemyStuned = "Enemy_Stuned";
+    
+    #endregion
+#region Goblin Animations
+    internal static string goblinIdle = "Goblin_Idle";
+    internal static string goblinMove = "Goblin_Move";
+    internal static string goblinChasing = "Goblin_Chasing";
+    internal static string goblinAttack = "Goblin_Attack";
+    internal static string goblinStuned = "Goblin_Stuned";
+#endregion
 }

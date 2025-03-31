@@ -1,11 +1,12 @@
+using System.Data.Common;
 using UnityEngine;
 
 public class EnemyIdleState : EnemyState
 {
-    private float idleTime = 0f;
-    private bool enemyCheck;
+    protected float idleTime;
+    protected bool enemyCheck;
 
-    private bool isEnemyInAttackArea;
+    protected bool isEnemyInAttackArea;
 
     public EnemyIdleState(Enemy enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
     {
@@ -21,8 +22,8 @@ public class EnemyIdleState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        enemy.Anim.Play(AnimStrings.enemyIdle);
         enemy.Core.Movement.SetVelocityX(0f);
+        enemy.Anim.Play(AnimStrings.goblinIdle);
         idleTime = 0f;
     }
 
@@ -35,16 +36,9 @@ public class EnemyIdleState : EnemyState
     {
         base.LogicUpdate();
         idleTime += Time.deltaTime;
-        
-
-        if (enemyCheck)
-        {
-            eStateMachine.ChangeState(enemy.DetectedState);
-        }
-        else if (idleTime >= enemyData.idleDuration)
+        if(idleTime >= enemyData.idleDuration)
         {
             enemy.Core.Movement.Flip();
-            eStateMachine.ChangeState(enemy.MoveState);
         }
 
     }
