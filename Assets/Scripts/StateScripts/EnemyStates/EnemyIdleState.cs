@@ -3,6 +3,20 @@ using UnityEngine;
 
 public class EnemyIdleState : EnemyState
 {
+    protected Movement Movement { get => movement ??= enemy.Core.GetCoreComponent<Movement>(); }
+    private Movement movement;
+
+    private CollisionSenses CollisionSenses
+    {
+        get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();
+    }
+    private CollisionSenses collisionSenses;
+
+    private DetectingSenses DetectingSenses
+    {
+        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
+    }
+    private DetectingSenses detectingSenses;
     protected float idleTime;
     protected bool enemyCheck;
 
@@ -15,14 +29,16 @@ public class EnemyIdleState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        enemyCheck = enemy.Core.DetectingSenses.IsEnemy;
-
+        if (DetectingSenses)
+        {
+            enemyCheck = DetectingSenses.IsEnemy;
+        }
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemy.Core.Movement.SetVelocityX(0f);
+        Movement?.SetVelocityX(0f);
         enemy.Anim.Play(AnimStrings.goblinIdle);
         idleTime = 0f;
     }
@@ -36,9 +52,9 @@ public class EnemyIdleState : EnemyState
     {
         base.LogicUpdate();
         idleTime += Time.deltaTime;
-        if(idleTime >= enemyData.idleDuration)
+        if (idleTime >= enemyData.idleDuration)
         {
-            enemy.Core.Movement.Flip();
+            Movement?.Flip();
         }
 
     }

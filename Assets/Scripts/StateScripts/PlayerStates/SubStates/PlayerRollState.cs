@@ -17,7 +17,7 @@ public class PlayerRollState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        core.Movement.SetVelocityX(playerData.rollVelocity * core.Movement.FacingDirection);
+        Movement?.SetVelocityX(playerData.rollVelocity * Movement.FacingDirection);
         player.Anim.Play(AnimStrings.playerRoll);
         isAbilityDone = false;
     }

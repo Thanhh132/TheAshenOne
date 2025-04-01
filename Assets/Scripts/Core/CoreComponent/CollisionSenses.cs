@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CollisionSenses : CoreComponent
 {
+    protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
+    private Movement movement;
     public Transform GroundCheck
     {
         get => GenericNotImplementedError<Transform>.TryGet(groundCheck, core.transform.parent.name);
@@ -44,7 +46,7 @@ public class CollisionSenses : CoreComponent
 
     public bool IfTouchingWall
     {
-        get => Physics2D.Raycast(wallCheck.position, Vector2.right * core.Movement.FacingDirection, wallCheckDistance, isTouchingWall);
+        get => Physics2D.Raycast(wallCheck.position, Vector2.right * Movement.FacingDirection, wallCheckDistance, isTouchingWall);
     }
 
 

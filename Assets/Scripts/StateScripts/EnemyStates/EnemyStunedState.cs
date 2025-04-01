@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class EnemyStunedState : EnemyState
 {
+    protected Movement Movement { get => movement ??= enemy.Core.GetCoreComponent<Movement>(); }
+    private Movement movement;
+
+    private CollisionSenses CollisionSenses
+    {
+        get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();
+    }
+    private CollisionSenses collisionSenses;
+
+    private DetectingSenses DetectingSenses
+    {
+        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
+    }
+    private DetectingSenses detectingSenses;
     protected bool isEnemyInChasingArea;
     public EnemyStunedState(Enemy enemy, EnemyStateMachine eStateMachine, EnemyData enemyData, string animBoolName) : base(enemy, eStateMachine, enemyData, animBoolName)
     {
@@ -12,14 +26,18 @@ public class EnemyStunedState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        isEnemyInChasingArea = enemy.Core.DetectingSenses.IsEnemyInChasingArea;
+        if (DetectingSenses)
+        {
+            isEnemyInChasingArea = DetectingSenses.IsEnemyInChasingArea;
+        }
+
     }
 
     public override void Enter()
     {
         base.Enter();
         enemy.Anim.Play(AnimStrings.goblinStuned);
-        enemy.Core.Movement.SetVelocityX(0);
+        Movement?.SetVelocityX(0);
     }
 
     public override void Exit()
@@ -41,5 +59,5 @@ public class EnemyStunedState : EnemyState
     {
         base.AnimationTrigger();
     }
-    
+
 }

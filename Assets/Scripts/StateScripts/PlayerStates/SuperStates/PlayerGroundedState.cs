@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
 {
+    protected Movement Movement {get => movement ??= core.GetCoreComponent<Movement>(); }
+    private Movement movement;
+    private CollisionSenses CollisionSenses
+    {
+        get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>();
+    }
+    private CollisionSenses collisionSenses;
+
     protected float xInput;
     protected bool jumpInput;
     protected bool attackInput;
@@ -18,7 +26,10 @@ public class PlayerGroundedState : PlayerState
     public override void DoCheck()
     {
         base.DoCheck();
-        isGrounded = player.Core.CollisionSenses.IfGrounded;
+        if (CollisionSenses)
+        {
+            isGrounded = CollisionSenses.IfGrounded;
+        }
     }
 
     public override void Enter()

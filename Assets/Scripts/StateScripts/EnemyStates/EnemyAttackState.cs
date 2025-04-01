@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyState
 {
+    protected Movement Movement { get => movement ??= enemy.Core.GetCoreComponent<Movement>(); }
+    private Movement movement;
+
+    private CollisionSenses CollisionSenses
+    {
+        get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();
+    }
+    private CollisionSenses collisionSenses;
+
+    private DetectingSenses DetectingSenses
+    {
+        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
+    }
+    private DetectingSenses detectingSenses;
     protected bool isEnemyInChasingArea;
     protected bool isEnemyInAttackArea;
 
@@ -14,14 +28,17 @@ public class EnemyAttackState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        isEnemyInChasingArea = enemy.Core.DetectingSenses.IsEnemyInChasingArea;
-        isEnemyInAttackArea = enemy.Core.DetectingSenses.IsEnemyInAttackArea;
+        if (DetectingSenses)
+        {
+            isEnemyInChasingArea = DetectingSenses.IsEnemyInChasingArea;
+            isEnemyInAttackArea = DetectingSenses.IsEnemyInAttackArea;
+        }
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemy.Core.Movement.SetVelocityX(0);
+        Movement?.SetVelocityX(0);
         enemy.Anim.Play(AnimStrings.goblinAttack);
     }
 

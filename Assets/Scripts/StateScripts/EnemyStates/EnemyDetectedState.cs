@@ -5,6 +5,20 @@ using UnityEngine;
 
 public class EnemyDetectedState : EnemyState
 {
+    protected Movement Movement { get => movement ??= enemy.Core.GetCoreComponent<Movement>(); }
+    private Movement movement;
+
+    private CollisionSenses CollisionSenses
+    {
+        get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();
+    }
+    private CollisionSenses collisionSenses;
+
+    private DetectingSenses DetectingSenses
+    {
+        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
+    }
+    private DetectingSenses detectingSenses;
     protected bool isEnemyInChasingArea;
     protected bool isEnemyInAttackArea;
 
@@ -22,18 +36,25 @@ public class EnemyDetectedState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        isEnemyInChasingArea = enemy.Core.DetectingSenses.IsEnemyInChasingArea;
-        isEnemyInAttackArea = enemy.Core.DetectingSenses.IsEnemyInAttackArea;
-        wallCheck = enemy.Core.CollisionSenses.WallCheck;
-        ledgeCheck = enemy.Core.CollisionSenses.LedgeCheck;
+        if (CollisionSenses)
+        {
+            wallCheck = CollisionSenses.WallCheck;
+            ledgeCheck = CollisionSenses.LedgeCheck;
+        }
+
+        if (DetectingSenses)
+        {
+            isEnemyInChasingArea = DetectingSenses.IsEnemyInChasingArea;
+            isEnemyInAttackArea = DetectingSenses.IsEnemyInAttackArea;
+        }
     }
 
     public override void Enter()
     {
         base.Enter();
-        
+
         chargeTimer = 0f;
-        enemy.Core.Movement.SetVelocityX(0f);
+        Movement?.SetVelocityX(0f);
         enemy.Anim.Play(AnimStrings.goblinIdle);
     }
 

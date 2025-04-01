@@ -31,7 +31,7 @@ public class PlayerAttackState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        core.Movement.SetVelocityX(0f);
+        Movement?.SetVelocityX(0f);
 
         AnimatorStateInfo stateInfo = player.Anim.GetCurrentAnimatorStateInfo(0);
 

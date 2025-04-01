@@ -5,6 +5,23 @@ using UnityEngine;
 
 public class EnemyMoveState : EnemyState
 {
+    protected Movement Movement { get => movement ??= enemy.Core.GetCoreComponent<Movement>(); }
+    private Movement movement;
+
+    private CollisionSenses CollisionSenses
+    {
+        get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();
+    }
+    private CollisionSenses collisionSenses;
+
+    private DetectingSenses DetectingSenses
+    {
+        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
+    }
+    private DetectingSenses detectingSenses;
+
+
+
     protected bool isEnemyInChasingArea;
     protected bool enemyCheck;
     protected bool ledgeCheck;
@@ -17,9 +34,16 @@ public class EnemyMoveState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        ledgeCheck = enemy.Core.CollisionSenses.IfTouchingLedge;
-        wallCheck = enemy.Core.CollisionSenses.IfTouchingWall;
-        enemyCheck = enemy.Core.DetectingSenses.IsEnemy;
+        if (CollisionSenses)
+        {
+            ledgeCheck = CollisionSenses.IfTouchingLedge;
+            wallCheck = CollisionSenses.IfTouchingWall;
+        }
+
+        if (DetectingSenses)
+        {
+            enemyCheck = DetectingSenses.IsEnemy;
+        }
     }
     public override void Enter()
     {
@@ -35,7 +59,7 @@ public class EnemyMoveState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        enemy.Core.Movement.SetVelocityX(enemyData.movementVelocity * enemy.Core.Movement.FacingDirection);
+        Movement?.SetVelocityX(enemyData.movementVelocity * Movement.FacingDirection);
     }
 
     public override void PhysicsUpdate()

@@ -20,7 +20,7 @@ public class Movement : CoreComponent
         FacingDirection = 1;
     }
 
-    public void LogicUpdate()
+    public override void LogicUpdate()
     {
         CurrentVelocity = RB.velocity;
     }

@@ -17,7 +17,7 @@ public class PlayerJumpState : PlayerAirState
     {
         base.Enter();
         player.Anim.Play(AnimStrings.playerInAir);
-        core.Movement.SetVelocityY(playerData.jumpVelocity);
+        Movement.SetVelocityY(playerData.jumpVelocity);
         isAbilityDone = false;
     }
 

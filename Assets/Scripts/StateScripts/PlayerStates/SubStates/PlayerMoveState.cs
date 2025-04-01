@@ -17,8 +17,6 @@ public class PlayerMoveState : PlayerGroundedState
     public override void DoCheck()
     {
         base.DoCheck();
-        isGrounded = player.Core.CollisionSenses.IfGrounded;
-        isTouchingWall = player.Core.CollisionSenses.IfTouchingWall;
     }
 
     public override void Enter()
@@ -35,11 +33,11 @@ public class PlayerMoveState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        core.Movement.FlipCheck(xInput);
+        Movement?.FlipCheck(xInput);
         slideInput = player.InputHandle.SlideInput;
         rollInput = player.InputHandle.RollInput;
 
-        core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+        Movement?.SetVelocityX(playerData.movementVelocity * xInput);
         if (xInput == 0)
         {
             stateMachine.ChangeState(player.IdleState);

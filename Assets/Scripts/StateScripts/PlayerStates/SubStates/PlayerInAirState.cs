@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
+    private Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
+    private Movement movement;
+    private CollisionSenses CollisionSenses
+    {
+        get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>();
+    }
+    private CollisionSenses collisionSenses;
     private float xInput;
     private bool jumpInput;
     private bool isGrounded;
+    private bool isTouchingWall;
     private bool isClimbable;
     private bool grabInput;
 
@@ -17,7 +25,12 @@ public class PlayerInAirState : PlayerState
     public override void DoCheck()
     {
         base.DoCheck();
-        isGrounded = player.Core.CollisionSenses.IfGrounded;
+        if (CollisionSenses)
+        {
+            isGrounded = CollisionSenses.IfGrounded;
+            isTouchingWall = collisionSenses.IfTouchingWall;
+        }
+
     }
 
     public override void Enter()
@@ -46,14 +59,14 @@ public class PlayerInAirState : PlayerState
         }
         else
         {
-            if (xInput != 0 && !player.Core.CollisionSenses.IfTouchingWall)
+            if (xInput != 0 && !CollisionSenses.IfTouchingWall)
             {
-                core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+                Movement?.SetVelocityX(playerData.movementVelocity * xInput);
             }
-            else if (player.Core.CollisionSenses.IfTouchingWall && xInput != 0)
+            else if (isTouchingWall && xInput != 0)
             {
-                float wallPushForce = 1f; 
-                core.Movement.SetVelocityX(wallPushForce * core.Movement.FacingDirection);
+                float wallPushForce = 1f;
+                Movement?.SetVelocityX(wallPushForce * Movement.FacingDirection);
             }
         }
     }

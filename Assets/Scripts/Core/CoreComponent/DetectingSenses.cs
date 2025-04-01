@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DetectingSenses : CoreComponent
 {
+    protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
+    private Movement movement;
     [SerializeField] private Transform enemyCheck;
     [SerializeField] private float detectingRange;
     [SerializeField] private float attackRange;
@@ -32,7 +34,7 @@ public class DetectingSenses : CoreComponent
 
     public bool IsEnemy
     {
-        get => Physics2D.Raycast(enemyCheck.position, Vector2.right * core.Movement.FacingDirection, detectingRange, isEnemy);
+        get => Physics2D.Raycast(enemyCheck.position, Vector2.right * Movement.FacingDirection, detectingRange, isEnemy);
     }
 
     public bool IsEnemyInChasingArea
@@ -47,6 +49,6 @@ public class DetectingSenses : CoreComponent
 
     public bool IsEnemyInAttackArea
     {
-        get => Physics2D.Raycast(attackZone.position, Vector2.right * core.Movement.FacingDirection, attackRange, isEnemy);
+        get => Physics2D.Raycast(attackZone.position, Vector2.right * Movement.FacingDirection, attackRange, isEnemy);
     }
 }

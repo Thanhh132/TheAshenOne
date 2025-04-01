@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IStunable
 {
+    private Stats Stats
+    {
+        get => stats ??= core.GetCoreComponent<Stats>();
+    }
+    private Stats stats;
     public void TakeDamage(float damage)
     {
         Debug.Log(core.transform.parent.name + " nhận " + damage + " damage");
+        Stats.DecreseHealth(damage);
         IStunable stunnable = core.transform.parent.GetComponent<IStunable>();
         stunnable?.ApplyStun();
     }

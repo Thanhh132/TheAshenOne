@@ -21,7 +21,7 @@ public class PlayerClimbState : PlayerAirState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        core.Movement.SetVelocityY(playerData.climbVelocity);
+        Movement?.SetVelocityY(playerData.climbVelocity);
     }
 
     public override void PhysicsUpdate()

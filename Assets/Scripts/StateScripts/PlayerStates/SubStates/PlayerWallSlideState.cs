@@ -20,7 +20,7 @@ public class PlayerWallSlideState : PlayerAirState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        core.Movement.SetVelocityY(-playerData.wallSlideVelocity);
+        Movement.SetVelocityY(-playerData.wallSlideVelocity);
      
     }
 }

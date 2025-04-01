@@ -127,7 +127,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8c004e938b016c34bae87f570538b75c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -147,7 +147,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1324206797466431194}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 8c004e938b016c34bae87f570538b75c, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -310,8 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 5
-  knockBackAngle: {x: 0, y: 2}
-  knockBackStrength: 2
+  knockBackAngle: {x: 2, y: 2}
 --- !u!1 &2754951920041358827
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +367,7 @@ Transform:
   m_GameObject: {fileID: 2890036714353341181}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.534, y: -1.539, z: 0}
+  m_LocalPosition: {x: -0.19, y: -1.555, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -518,7 +517,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 15
   knockBackAngle: {x: 5, y: 2}
-  knockBackStrength: 3
+--- !u!1 &6342134080600349316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546257529265991972}
+  - component: {fileID: 982743563872408090}
+  m_Layer: 6
+  m_Name: Stats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1546257529265991972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342134080600349316}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7521494164052667754}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &982743563872408090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342134080600349316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e4a2b3fde524a46b4555f7d126dbaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &6821832600027877793
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,6 +690,7 @@ Transform:
   - {fileID: 4272114256635454898}
   - {fileID: 4880300344239538981}
   - {fileID: 132334562477934834}
+  - {fileID: 1546257529265991972}
   m_Father: {fileID: 5117221026492071099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5512079680056263823
@@ -763,8 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 8
-  knockBackAngle: {x: 2, y: 0}
-  knockBackStrength: 2
+  knockBackAngle: {x: 3, y: 0}
 --- !u!1 &7458476051081565888
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,4 +968,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockBackAngle: {x: 3, y: 0}
-  knockBackStrength: 2

@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class PlayerAirState : PlayerState
 {
+    protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
+    private Movement movement;
+
+    private CollisionSenses CollisionSenses
+    {
+        get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>();
+    }
+    private CollisionSenses collisionSenses;
+
     protected bool attackInput;
     protected bool isGrounded;
-    
+
     public PlayerAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -14,7 +23,10 @@ public class PlayerAirState : PlayerState
     public override void DoCheck()
     {
         base.DoCheck();
-        isGrounded = player.Core.CollisionSenses.IfGrounded;
+        if (CollisionSenses)
+        {
+            isGrounded = CollisionSenses.IfGrounded;
+        }
     }
 
     public override void Enter()

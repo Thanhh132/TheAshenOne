@@ -5,6 +5,20 @@ using UnityEngine;
 
 public class EnemyChasingState : EnemyState
 {
+    protected Movement Movement { get => movement ??= enemy.Core.GetCoreComponent<Movement>(); }
+    private Movement movement;
+
+    private CollisionSenses CollisionSenses
+    {
+        get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();
+    }
+    private CollisionSenses collisionSenses;
+
+    private DetectingSenses DetectingSenses
+    {
+        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
+    }
+    private DetectingSenses detectingSenses;
     protected bool isEnemyInAttackArea;
     protected bool isEnemyInChasingArea;
 
@@ -24,11 +38,17 @@ public class EnemyChasingState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        wallCheck = enemy.Core.CollisionSenses.IfTouchingWall;
-        ledgeCheck = enemy.Core.CollisionSenses.IfTouchingLedge;
+        if (CollisionSenses)
+        {
+            wallCheck = CollisionSenses.IfTouchingWall;
+            ledgeCheck = CollisionSenses.IfTouchingLedge;
+        }
 
-        isEnemyInAttackArea = enemy.Core.DetectingSenses.IsEnemyInAttackArea;
-        isEnemyInChasingArea = enemy.Core.DetectingSenses.IsEnemyInChasingArea;
+        if (detectingSenses)
+        {
+            isEnemyInAttackArea =DetectingSenses.IsEnemyInAttackArea;
+            isEnemyInChasingArea = DetectingSenses.IsEnemyInChasingArea;
+        }
     }
 
     public override void Enter()
@@ -43,7 +63,7 @@ public class EnemyChasingState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        Transform target = enemy.Core.DetectingSenses.GetEnemyTarget();
+        Transform target = DetectingSenses.GetEnemyTarget();
         attackTimer -= Time.deltaTime;
         giveUpTimer -= Time.deltaTime;
     }

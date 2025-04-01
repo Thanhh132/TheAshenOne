@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GoblinChasingState : EnemyChasingState
 {
+    private DetectingSenses DetectingSenses
+    {
+        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
+    }
+    private DetectingSenses detectingSenses;
     Goblin goblin;
     public GoblinChasingState(Enemy enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName, Goblin goblin) : base(enemy, stateMachine, enemyData, animBoolName)
     {
@@ -29,13 +34,13 @@ public class GoblinChasingState : EnemyChasingState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        Transform target = enemy.Core.DetectingSenses.GetEnemyTarget();
+        Transform target = DetectingSenses.GetEnemyTarget();
         attackTimer -= Time.deltaTime;
         giveUpTimer -= Time.deltaTime;
 
         if (isEnemyInAttackArea)
         {
-            enemy.Core.Movement.SetVelocityX(0);
+            Movement.SetVelocityX(0);
             enemy.Anim.Play(AnimStrings.goblinIdle);
             if (attackTimer <= 0)
             {
@@ -48,14 +53,14 @@ public class GoblinChasingState : EnemyChasingState
         {
             float direction = Mathf.Sign(target.position.x - enemy.transform.position.x);
 
-            if (direction != enemy.Core.Movement.FacingDirection)
+            if (direction != Movement.FacingDirection)
             {
-                enemy.Core.Movement.Flip();
+                Movement.Flip();
             }
             if (!wallCheck && !ledgeCheck)
             {
                 enemy.Anim.Play(AnimStrings.goblinMove);
-                enemy.Core.Movement.SetVelocityX(enemyData.movementVelocity * direction);
+                Movement.SetVelocityX(enemyData.movementVelocity * direction);
             }
             else
             {

@@ -15,7 +15,7 @@ public class PlayerLandState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        core.Movement.SetVelocityX(0);
+        Movement.SetVelocityX(0);
         player.Anim.Play(AnimStrings.playerLand);
     }
 
