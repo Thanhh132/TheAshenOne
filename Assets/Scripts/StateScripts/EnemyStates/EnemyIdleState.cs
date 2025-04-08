@@ -6,20 +6,15 @@ public class EnemyIdleState : EnemyState
     protected Movement Movement { get => movement ??= enemy.Core.GetCoreComponent<Movement>(); }
     private Movement movement;
 
-    private CollisionSenses CollisionSenses
-    {
-        get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();
-    }
+    private CollisionSenses CollisionSenses { get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();}
     private CollisionSenses collisionSenses;
 
-    private DetectingSenses DetectingSenses
-    {
-        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
-    }
+    private DetectingSenses DetectingSenses { get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();}
     private DetectingSenses detectingSenses;
-    protected float idleTime;
-    protected bool enemyCheck;
 
+    protected float idleTime;
+    
+    protected bool enemyCheck;
     protected bool isEnemyInAttackArea;
 
     public EnemyIdleState(Enemy enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)

@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IStunable
 {
+    [SerializeField] private GameObject damageParticles;
+
     private Stats Stats
     {
         get => stats ??= core.GetCoreComponent<Stats>();
     }
+
+    private ParticleManager ParticleManager
+    {
+        get => particleManager ??= core.GetCoreComponent<ParticleManager>();
+    }
     private Stats stats;
+    private ParticleManager particleManager;
     public void TakeDamage(float damage)
     {
         Debug.Log(core.transform.parent.name + " nhận " + damage + " damage");
         Stats.DecreseHealth(damage);
+        ParticleManager.StartParticlesWithRandomRotation(damageParticles);
         IStunable stunnable = core.transform.parent.GetComponent<IStunable>();
         stunnable?.ApplyStun();
     }

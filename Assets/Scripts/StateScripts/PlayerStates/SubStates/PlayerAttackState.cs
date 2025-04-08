@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerAttackState : PlayerGroundedState
 {
-
     private int attackCount = 1;
     private int maxAttackCount = 4;
     private bool canCombo = false;
@@ -19,7 +18,6 @@ public class PlayerAttackState : PlayerGroundedState
         canCombo = false;
         player.Anim.Play("Player_Attack_" + attackCount);
         isAbilityDone = false;
-
     }
 
     public override void Exit()

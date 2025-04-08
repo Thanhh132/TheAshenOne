@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
 {
-    protected Movement Movement {get => movement ??= core.GetCoreComponent<Movement>(); }
     private Movement movement;
-    private CollisionSenses CollisionSenses
-    {
-        get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>();
-    }
+    protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
+
     private CollisionSenses collisionSenses;
+    private CollisionSenses CollisionSenses { get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>(); }
+
 
     protected float xInput;
     protected bool jumpInput;

@@ -7,7 +7,6 @@ public class PlayerMoveState : PlayerGroundedState
     private bool slideInput;
     private bool rollInput;
     private bool isTouchingWall;
-    private bool isClimbable;
 
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {

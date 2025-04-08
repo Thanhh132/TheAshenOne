@@ -8,22 +8,15 @@ public class EnemyMoveState : EnemyState
     protected Movement Movement { get => movement ??= enemy.Core.GetCoreComponent<Movement>(); }
     private Movement movement;
 
-    private CollisionSenses CollisionSenses
-    {
-        get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();
-    }
+    private CollisionSenses CollisionSenses { get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>(); }
     private CollisionSenses collisionSenses;
 
-    private DetectingSenses DetectingSenses
-    {
-        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
-    }
+    private DetectingSenses DetectingSenses { get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>(); }
     private DetectingSenses detectingSenses;
-
-
 
     protected bool isEnemyInChasingArea;
     protected bool enemyCheck;
+    
     protected bool ledgeCheck;
     protected bool wallCheck;
 

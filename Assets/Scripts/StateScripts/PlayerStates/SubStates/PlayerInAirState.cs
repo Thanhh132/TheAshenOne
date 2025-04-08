@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
-    private Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
     private Movement movement;
-    private CollisionSenses CollisionSenses
-    {
-        get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>();
-    }
+    private Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
+
     private CollisionSenses collisionSenses;
+    private CollisionSenses CollisionSenses { get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>(); }
+
     private float xInput;
     private bool jumpInput;
+    
     private bool isGrounded;
     private bool isTouchingWall;
-    private bool isClimbable;
-    private bool grabInput;
+
 
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -48,10 +47,9 @@ public class PlayerInAirState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         xInput = player.InputHandle.XInput;
         jumpInput = player.InputHandle.JumpInput;
-        grabInput = player.InputHandle.GrabInput;
+
 
         if (isGrounded && player.CurrentVelocity.y < 0.01f)
         {

@@ -5,8 +5,6 @@ using System.Linq;
 
 public class Core : MonoBehaviour
 {
- 
-
     private readonly List<CoreComponent> CoreComponents = new List<CoreComponent>();
 
     public void Awake()

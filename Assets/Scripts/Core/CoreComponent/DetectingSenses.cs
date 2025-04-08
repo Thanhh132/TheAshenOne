@@ -6,9 +6,11 @@ public class DetectingSenses : CoreComponent
 {
     protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
     private Movement movement;
+    
     [SerializeField] private Transform enemyCheck;
     [SerializeField] private float detectingRange;
     [SerializeField] private float attackRange;
+
     [SerializeField] private Collider2D chasingRange;
     [SerializeField] private Transform attackZone;
     [SerializeField] private LayerMask isEnemy;

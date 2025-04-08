@@ -6,6 +6,7 @@ public class CollisionSenses : CoreComponent
 {
     protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
     private Movement movement;
+    
     public Transform GroundCheck
     {
         get => GenericNotImplementedError<Transform>.TryGet(groundCheck, core.transform.parent.name);

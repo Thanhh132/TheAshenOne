@@ -8,17 +8,12 @@ public class EnemyChasingState : EnemyState
     protected Movement Movement { get => movement ??= enemy.Core.GetCoreComponent<Movement>(); }
     private Movement movement;
 
-    private CollisionSenses CollisionSenses
-    {
-        get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();
-    }
+    private CollisionSenses CollisionSenses { get => collisionSenses ??= enemy.Core.GetCoreComponent<CollisionSenses>();}
     private CollisionSenses collisionSenses;
 
-    private DetectingSenses DetectingSenses
-    {
-        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
-    }
+    private DetectingSenses DetectingSenses { get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();}
     private DetectingSenses detectingSenses;
+
     protected bool isEnemyInAttackArea;
     protected bool isEnemyInChasingArea;
 
@@ -44,7 +39,7 @@ public class EnemyChasingState : EnemyState
             ledgeCheck = CollisionSenses.IfTouchingLedge;
         }
 
-        if (detectingSenses)
+        if (DetectingSenses)
         {
             isEnemyInAttackArea =DetectingSenses.IsEnemyInAttackArea;
             isEnemyInChasingArea = DetectingSenses.IsEnemyInChasingArea;

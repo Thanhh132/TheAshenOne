@@ -8,7 +8,6 @@ public class PlayerIdleState : PlayerGroundedState
     {
     }
 
-    
     public override void DoCheck()
     {
         base.DoCheck();

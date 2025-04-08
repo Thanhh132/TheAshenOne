@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class GoblinChasingState : EnemyChasingState
 {
-    private DetectingSenses DetectingSenses
-    {
-        get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();
-    }
+    private DetectingSenses DetectingSenses{ get => detectingSenses ??= enemy.Core.GetCoreComponent<DetectingSenses>();}
     private DetectingSenses detectingSenses;
     Goblin goblin;
     public GoblinChasingState(Enemy enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName, Goblin goblin) : base(enemy, stateMachine, enemyData, animBoolName)
