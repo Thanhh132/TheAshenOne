@@ -11,10 +11,10 @@ public class Core : MonoBehaviour
     {
 
     }
-    
+
     public void LogicUpdate()
     {
-        foreach(CoreComponent component in CoreComponents)
+        foreach (CoreComponent component in CoreComponents)
         {
             component.LogicUpdate();
         }
@@ -22,7 +22,7 @@ public class Core : MonoBehaviour
 
     public void AddComponent(CoreComponent component)
     {
-        if(!CoreComponents.Contains(component))
+        if (!CoreComponents.Contains(component))
         {
             CoreComponents.Add(component);
         }
@@ -32,10 +32,14 @@ public class Core : MonoBehaviour
     {
         var comp = CoreComponents.OfType<T>().FirstOrDefault();
 
-        if (comp == null)
-        {
+        if (comp)
+            return comp;
+
+            comp = GetComponentInChildren<T>();
+
+            if (comp) 
+                return comp;
             Debug.LogWarning($"{typeof(T).Name} not found in {transform.parent.name}.");
-        }
-        return comp;
+            return null;
     }
 }

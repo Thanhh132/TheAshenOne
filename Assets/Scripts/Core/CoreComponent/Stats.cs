@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class Stats : CoreComponent
 {
+    public event Action OnHealthZero;
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth;
 
@@ -21,6 +23,8 @@ public class Stats : CoreComponent
         if (currentHealth <= 0)
         {
             currentHealth = 0;
+            OnHealthZero?.Invoke();
+
             Debug.Log("Character is dead.");
         }
     }

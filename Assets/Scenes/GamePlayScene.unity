@@ -6206,10 +6206,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 359283172832359814, guid: 9eb645e5acc34ba46961147555d36f2f, type: 3}
-      propertyPath: damageParticles
-      value: 
-      objectReference: {fileID: 106215111903934170, guid: 01e1186b918b3c744a53888eb6d2c20f, type: 3}
     - target: {fileID: 7179194267582934859, guid: 9eb645e5acc34ba46961147555d36f2f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.05
@@ -6254,6 +6250,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 8452642403177506904, guid: 9eb645e5acc34ba46961147555d36f2f, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6271,10 +6271,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2023582575592486363, guid: 0504e645c6f3df949ab2db35ce02c06a, type: 3}
-      propertyPath: damageParticles
-      value: 
-      objectReference: {fileID: 106215111903934170, guid: 01e1186b918b3c744a53888eb6d2c20f, type: 3}
     - target: {fileID: 5117221026492071099, guid: 0504e645c6f3df949ab2db35ce02c06a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30.39
