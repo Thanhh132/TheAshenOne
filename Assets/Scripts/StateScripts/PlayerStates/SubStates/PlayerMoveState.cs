@@ -33,7 +33,6 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.LogicUpdate();
         Movement?.FlipCheck(xInput);
-        slideInput = player.InputHandle.SlideInput;
         rollInput = player.InputHandle.RollInput;
 
         Movement?.SetVelocityX(playerData.movementVelocity * xInput);
@@ -41,10 +40,7 @@ public class PlayerMoveState : PlayerGroundedState
         {
             stateMachine.ChangeState(player.IdleState);
         }
-        else if (xInput != 0 && slideInput && !isTouchingWall)
-        {
-            stateMachine.ChangeState(player.SlideState);
-        }else if (xInput != 0 && rollInput)
+        else if (xInput != 0 && rollInput)
         {
             stateMachine.ChangeState(player.RollState);
         }

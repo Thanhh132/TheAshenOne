@@ -10,7 +10,6 @@ public class PlayerInputHandle : MonoBehaviour
     public bool AttackInput {get; private set;}
     public bool JumpInput {get; private set;}
     public bool GrabInput {get; private set;}
-    public bool SlideInput {get; private set;}
     public bool RollInput {get; private set;}
 
     [SerializeField]
@@ -25,7 +24,6 @@ public class PlayerInputHandle : MonoBehaviour
         YInput = Input.GetAxisRaw("Vertical");
         JumpInput = Input.GetButtonDown("Jump");
         GrabInput = Input.GetKey(KeyCode.LeftControl);
-        SlideInput = Input.GetKeyDown(KeyCode.LeftShift);
         RollInput = Input.GetKeyDown(KeyCode.Mouse1);
         AttackInput = Input.GetKeyDown(KeyCode.Mouse0);
     }

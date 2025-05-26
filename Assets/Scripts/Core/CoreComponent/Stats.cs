@@ -7,18 +7,21 @@ using UnityEngine;
 public class Stats : CoreComponent
 {
     public event Action OnHealthZero;
-    [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float currentHealth;
+    [SerializeField] public float maxHealth;
+    [SerializeField] public float currentHealth;
+    public HealthBar healthBar;
 
     protected override void Awake()
     {
         base.Awake();
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
-    public void DecreseHealth(float amount)
+    public void DecreaseHealth(float amount)
     {
         currentHealth -= amount;
+        healthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {

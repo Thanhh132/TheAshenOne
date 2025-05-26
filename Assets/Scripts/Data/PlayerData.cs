@@ -8,9 +8,6 @@ public class PlayerData : ScriptableObject
     [Header("Move State")]
     public float movementVelocity = 5f;
 
-    [Header("Slide State")]
-    public float slideVelocity = 7f;
-
     [Header("Jump State")]
     public float jumpVelocity = 5f;
 
@@ -25,5 +22,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Stats")]
     public float damage;
+    public float maxHealth = 100f;
+    public float maxMana = 50f;
 
 }

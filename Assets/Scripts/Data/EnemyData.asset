@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementVelocity: 5
   idleDuration: 1.5
-  attackCooldown: 0.5
+  attackCooldown: 2
   wallCheckRadius: 0.5
   ledgeCheckDistance: 0.03
   detectingRange: 5

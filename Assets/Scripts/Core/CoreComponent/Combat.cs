@@ -20,7 +20,7 @@ public class Combat : CoreComponent, IDamageable, IStunable
     public void TakeDamage(float damage)
     {
         Debug.Log(core.transform.parent.name + " nhận " + damage + " damage");
-        Stats.DecreseHealth(damage);
+        Stats.DecreaseHealth(damage);
         ParticleManager.StartParticlesWithRandomRotation(damageParticles);
         IStunable stunnable = core.transform.parent.GetComponent<IStunable>();
         stunnable?.ApplyStun();
