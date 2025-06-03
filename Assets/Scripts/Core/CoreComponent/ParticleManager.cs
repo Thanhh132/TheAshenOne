@@ -11,7 +11,7 @@ public class ParticleManager : CoreComponent
     {
         base.Awake();
 
-        particleContainer = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
+        // particleContainer = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
     }
 
     public GameObject StartParticles(GameObject particlePrefab, Vector2 postition, Quaternion rotation)

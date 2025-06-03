@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "The Ashen One.sln"
+    "dotnet.defaultSolution": "TheAshenOne.sln"
 }

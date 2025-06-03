@@ -34,6 +34,7 @@ public class Stats : CoreComponent
 
     public void IncreaseHealth(float amount)
     {
-        currentHealth += math.clamp(currentHealth + amount, 0, maxHealth);
+        currentHealth = math.clamp(currentHealth + amount, 0, maxHealth);
+        healthBar.SetHealth(currentHealth);
     }
 }
