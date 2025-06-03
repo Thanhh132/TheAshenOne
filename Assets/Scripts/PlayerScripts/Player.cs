@@ -17,6 +17,7 @@ public class Player : MonoBehaviour, IStunable
     public PlayerClimbState ClimbState { get; private set; }
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerRollState RollState { get; private set; }
+    public PlayerPrayingState PrayingState { get; private set; }
 
     [SerializeField]
     private PlayerData playerData;
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour, IStunable
         ClimbState = new PlayerClimbState(this, StateMachine, playerData, AnimStrings.playerClimb);
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, AnimStrings.playerWallSlide);
         RollState = new PlayerRollState(this, StateMachine, playerData, AnimStrings.playerRoll);
-
+        PrayingState = new PlayerPrayingState(this, StateMachine, playerData, AnimStrings.playerPraying);
     }
 
     private void Start()

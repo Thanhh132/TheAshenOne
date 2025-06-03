@@ -11,6 +11,8 @@ public class PlayerInputHandle : MonoBehaviour
     public bool JumpInput {get; private set;}
     public bool GrabInput {get; private set;}
     public bool RollInput {get; private set;}
+    public bool InteractInput {get; private set;}
+    public bool NearCheckpoint { get; private set; }
 
     [SerializeField]
 
@@ -26,7 +28,12 @@ public class PlayerInputHandle : MonoBehaviour
         GrabInput = Input.GetKey(KeyCode.LeftControl);
         RollInput = Input.GetKeyDown(KeyCode.Mouse1);
         AttackInput = Input.GetKeyDown(KeyCode.Mouse0);
+        InteractInput = Input.GetKeyDown(KeyCode.E);
     }
     public void UseJumpInput() => JumpInput = false;  
+    public void SetNearCheckpoint(bool value)
+    {
+        NearCheckpoint = value;
+    }
 }
 

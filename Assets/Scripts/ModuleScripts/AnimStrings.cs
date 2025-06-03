@@ -13,9 +13,10 @@ internal class AnimStrings
     internal static string playerWallSlide = "Player_WallSlide";
     internal static string playerSlide = "Player_Slide";
     internal static string playerRoll = "Player_Roll";
+    internal static string playerPraying = "Player_Praying";
     
     #endregion
-#region Goblin Animations
+    #region Goblin Animations
     internal static string goblinIdle = "Goblin_Idle";
     internal static string goblinMove = "Goblin_Move";
     internal static string goblinChasing = "Goblin_Chasing";

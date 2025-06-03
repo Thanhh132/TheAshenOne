@@ -14,6 +14,7 @@ public class PlayerGroundedState : PlayerState
     protected float xInput;
     protected bool jumpInput;
     protected bool attackInput;
+    protected bool interactInput;
     protected bool isGrounded;
 
 
@@ -49,7 +50,7 @@ public class PlayerGroundedState : PlayerState
         xInput = player.InputHandle.XInput;
         jumpInput = player.InputHandle.JumpInput;
         attackInput = player.InputHandle.AttackInput;
-
+        interactInput = player.InputHandle.InteractInput;
         if (jumpInput == true && isGrounded && isAbilityDone)
         {
             stateMachine.ChangeState(player.JumpState);
@@ -61,6 +62,10 @@ public class PlayerGroundedState : PlayerState
         else if (attackInput && isAbilityDone)
         {
             stateMachine.ChangeState(player.AttackState);
+        }
+        else if (interactInput && isGrounded && player.InputHandle.NearCheckpoint)
+        {
+            stateMachine.ChangeState(player.PrayingState);
         }
     }
 
