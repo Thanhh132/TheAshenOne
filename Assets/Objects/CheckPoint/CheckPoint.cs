@@ -8,8 +8,10 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            UIManager.Instance.ShowInteractMessage(interactMessage);
-            other.GetComponent<PlayerInputHandle>().SetNearCheckpoint(true);
+            var input = other.GetComponent<PlayerInputHandle>();
+            input.SetNearCheckpoint(true);
+            input.CurrentCheckpoint = this.transform;
+            UIManager.Instance.ShowInteractMessage("Bấm E để tương tác");
         }
     }
 
@@ -17,8 +19,10 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            var input = other.GetComponent<PlayerInputHandle>();
+            input.SetNearCheckpoint(false);
+            input.CurrentCheckpoint = null;
             UIManager.Instance.HideInteractMessage();
-            other.GetComponent<PlayerInputHandle>().SetNearCheckpoint(false);
         }
     }
 }

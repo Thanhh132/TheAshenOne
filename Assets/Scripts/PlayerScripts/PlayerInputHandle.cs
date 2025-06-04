@@ -13,6 +13,7 @@ public class PlayerInputHandle : MonoBehaviour
     public bool RollInput {get; private set;}
     public bool InteractInput {get; private set;}
     public bool NearCheckpoint { get; private set; }
+    public Transform CurrentCheckpoint { get; set; }
 
     [SerializeField]
 

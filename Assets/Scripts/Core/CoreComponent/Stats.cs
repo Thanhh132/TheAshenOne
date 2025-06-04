@@ -26,8 +26,8 @@ public class Stats : CoreComponent
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            OnHealthZero?.Invoke();
-
+            healthBar.SetHealth(currentHealth);
+            OnHealthZero?.Invoke(); // Gọi sự kiện chết
             Debug.Log("Character is dead.");
         }
     }
@@ -35,6 +35,12 @@ public class Stats : CoreComponent
     public void IncreaseHealth(float amount)
     {
         currentHealth = math.clamp(currentHealth + amount, 0, maxHealth);
+        healthBar.SetHealth(currentHealth);
+    }
+
+    public void RestoreFullHealth()
+    {
+        currentHealth = maxHealth;
         healthBar.SetHealth(currentHealth);
     }
 }

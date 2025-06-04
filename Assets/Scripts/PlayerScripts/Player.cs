@@ -33,6 +33,7 @@ public class Player : MonoBehaviour, IStunable
     public Vector2 CurrentVelocity { get; private set; }
 
     public Vector2 workspace;
+    public Vector3 LastCheckpointPosition { get; private set; }
 
     private void Awake()
     {
@@ -84,4 +85,8 @@ public class Player : MonoBehaviour, IStunable
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
+    public void SetCheckpoint(Vector3 checkpointPosition)
+    {
+        LastCheckpointPosition = checkpointPosition;
+    }
 }

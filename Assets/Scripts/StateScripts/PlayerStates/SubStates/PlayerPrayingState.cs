@@ -17,6 +17,17 @@ public class PlayerPrayingState : PlayerGroundedState
     {
         base.Enter();
 
+        // Lưu vị trí checkpoint khi bắt đầu cầu nguyện
+        if (player.InputHandle.CurrentCheckpoint != null)
+        {
+            player.SetCheckpoint(player.InputHandle.CurrentCheckpoint.position);
+            Debug.Log("Checkpoint saved at: " + player.InputHandle.CurrentCheckpoint.position);
+        }
+        else
+        {
+            Debug.Log("No checkpoint to save!");
+        }
+
         player.Anim.Play(AnimStrings.playerPraying);
     }
 

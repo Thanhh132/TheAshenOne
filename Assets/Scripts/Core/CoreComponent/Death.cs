@@ -12,22 +12,51 @@ public class Death : CoreComponent
     protected Stats Stats { get => stats ??= core.GetCoreComponent<Stats>(); }
     private Stats stats;
 
+    private void OnEnable()
+    {
+        Stats stats = core.GetCoreComponent<Stats>();
+        if (stats != null)
+            stats.OnHealthZero += Die;
+    }
+
+    private void OnDisable()
+    {
+        Stats stats = core.GetCoreComponent<Stats>();
+        if (stats != null)
+            stats.OnHealthZero -= Die;
+    }
+
     public void Die()
     {
         foreach (var particle in deathParticles)
         {
             ParticleManager.StartParticles(particle);
         }
-        core.transform.parent.gameObject.SetActive(false);
-    }
 
-    private void OnEnable()
-    {
-        Stats.OnHealthZero += Die;
-    }
-    
-    private void OnDisable()
-    {
-        Stats.OnHealthZero -= Die;
+        var player = core.transform.parent.GetComponent<Player>();
+        if (player != null)
+        {
+            // Dịch chuyển về checkpoint gần nhất
+            player.transform.position = player.LastCheckpointPosition;
+
+            // Hồi đầy máu
+            var stats = player.GetComponentInChildren<Stats>();
+            if (stats != null)
+            {
+                stats.RestoreFullHealth();
+            }
+
+            // Active lại player
+            player.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Player not found for respawn!");
+        }
+
+        // Unactive player để trigger lại OnEnable/OnDisable nếu cần
+        // Nếu muốn delay, dùng Coroutine
+        core.transform.parent.gameObject.SetActive(false);
+        core.transform.parent.gameObject.SetActive(true);
     }
 }
