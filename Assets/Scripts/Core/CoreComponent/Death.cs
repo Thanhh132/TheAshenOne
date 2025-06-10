@@ -48,15 +48,17 @@ public class Death : CoreComponent
 
             // Active lại player
             player.gameObject.SetActive(true);
+
+            // Unactive player để trigger lại OnEnable/OnDisable nếu cần
+            // Nếu muốn delay, dùng Coroutine
+            core.transform.parent.gameObject.SetActive(false);
+            core.transform.parent.gameObject.SetActive(true);
         }
         else
         {
-            Debug.LogWarning("Player not found for respawn!");
+            // Nếu không phải player (ví dụ quái), chỉ set inactive hoặc destroy
+            core.transform.parent.gameObject.SetActive(false);
+            // Hoặc: GameObject.Destroy(core.transform.parent.gameObject);
         }
-
-        // Unactive player để trigger lại OnEnable/OnDisable nếu cần
-        // Nếu muốn delay, dùng Coroutine
-        core.transform.parent.gameObject.SetActive(false);
-        core.transform.parent.gameObject.SetActive(true);
     }
 }

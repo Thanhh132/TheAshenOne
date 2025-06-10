@@ -30,6 +30,12 @@ public class PlayerInputHandle : MonoBehaviour
         RollInput = Input.GetKeyDown(KeyCode.Mouse1);
         AttackInput = Input.GetKeyDown(KeyCode.Mouse0);
         InteractInput = Input.GetKeyDown(KeyCode.E);
+
+        // Xử lý bấm ESC để mở/tắt Pause Menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.TogglePauseMenu();
+        }
     }
     public void UseJumpInput() => JumpInput = false;  
     public void SetNearCheckpoint(bool value)
