@@ -31,7 +31,6 @@ public class PlayerInputHandle : MonoBehaviour
         AttackInput = Input.GetKeyDown(KeyCode.Mouse0);
         InteractInput = Input.GetKeyDown(KeyCode.E);
 
-        // Xử lý bấm ESC để mở/tắt Pause Menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             UIManager.Instance.TogglePauseMenu();
